@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 
+import com.activeandroid.ActiveAndroid;
 import com.github.jorgecastillo.FillableLoader;
 import com.ofppt.absys.R;
 
@@ -16,6 +17,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActiveAndroid.initialize(this);
         setTheme(android.R.style.ThemeOverlay_Material_Dark);
         setContentView(R.layout.activity_splash_screen);
 
