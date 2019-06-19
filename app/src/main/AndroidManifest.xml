@@ -10,9 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:fullBackupContent="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <meta-data android:name="AA_DB_NAME" android:value="Absence" />
-        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <activity android:name=".UI.Settings" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Absence" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+
         <activity android:name=".UI.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

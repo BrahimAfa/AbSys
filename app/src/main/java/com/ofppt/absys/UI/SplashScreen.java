@@ -1,8 +1,10 @@
 package com.ofppt.absys.UI;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -44,10 +46,10 @@ public class SplashScreen extends AppCompatActivity {
             }
 
             public void onFinish() {
-//                TODO
-//                Intent intent = new Intent(SplashScreen.this,MainActivity.class);
-//                startActivity(intent);
-//                finish();
+//                TODO: change the activty
+                Intent intent = new Intent(SplashScreen.this, Settings.class);
+                startActivity(intent);
+                finish();
             }
         }.start();
 
