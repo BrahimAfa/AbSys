@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\FrancXPT.ALSA-FREE-WIFI-\Desktop\settings_96px.png" />
-                                      <entry key="outputName" value="ic_setting_name" />
+                                      <entry key="imageAsset" value="C:\Users\FrancXPT.ALSA-FREE-WIFI-\Desktop\help_96px.png" />
+                                      <entry key="outputName" value="ic_help_name" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>

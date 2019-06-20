@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,6 +36,23 @@ public class Settings extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.action_Setting:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            // action with ID action_settings was selected
+            default:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+        }
+
+        return true;
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
@@ -43,6 +61,7 @@ public class Settings extends AppCompatActivity {
                 {
                         new Items(R.drawable.ic_down_name, "Export"),
                         new Items(R.drawable.ic_up_name, "Import"),
+                        new Items(R.drawable.ic_help_name, "About"),
 
                 };
 
@@ -66,6 +85,11 @@ public class Settings extends AppCompatActivity {
             case 1:
                 xx = "import";
                 checkPermissionsAndOpenFilePicker();
+                break;
+                case 2:
+                xx = "import";
+                Intent intent = new Intent(this,About.class);
+                startActivity(intent);
                 break;
         }
         Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
