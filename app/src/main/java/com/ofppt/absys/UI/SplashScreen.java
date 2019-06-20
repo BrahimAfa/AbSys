@@ -2,6 +2,8 @@ package com.ofppt.absys.UI;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -22,7 +24,10 @@ public class SplashScreen extends AppCompatActivity {
         ActiveAndroid.initialize(this);
         setTheme(android.R.style.ThemeOverlay_Material_Dark);
         setContentView(R.layout.activity_splash_screen);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         fillableLoader = findViewById(R.id.filableLoader);
         fillableLoader.setSvgPath(OFPPT_PATH);
         Animation fadeIn = new AlphaAnimation(0, 1);
