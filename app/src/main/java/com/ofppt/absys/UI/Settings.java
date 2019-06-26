@@ -194,6 +194,7 @@ public class Settings extends AppCompatActivity {
                     }
                 }
             }.start();
+            new Delete().from(ABSENCES.class).execute();
         }
     }
     public String md5(String s) {
