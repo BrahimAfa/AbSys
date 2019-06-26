@@ -1,20 +1,16 @@
-package com.ofppt.absys.UI;
+package com.ofppt.absys.Main.UI;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,31 +25,27 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+import com.ofppt.absys.Main.Adapters.SettingsAdapter;
 import com.ofppt.absys.R;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import Models.ABSENCES;
-import Models.FILIERES;
-import Models.GROUPES;
-import Models.STAGIAIRES;
+import com.ofppt.absys.Main.Models.ABSENCES;
+import com.ofppt.absys.Main.Models.FILIERES;
+import com.ofppt.absys.Main.Models.GROUPES;
+import com.ofppt.absys.Main.Models.STAGIAIRES;
 
 public class Settings extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package Models;
+package com.ofppt.absys.Main.Models;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

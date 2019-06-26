@@ -18,12 +18,12 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
-        <activity android:name=".UI.About">
+        <activity android:name=".Main.UI.About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ofppt.absys.UI.Settings" />
+                android:value="com.ofppt.absys.Main.UI.Settings" />
         </activity>
-        <activity android:name=".UI.Settings" >
+        <activity android:name=".Main.UI.Settings" >
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value="com.ofppt.absys.UI..MainActivity" />-->
@@ -37,7 +37,7 @@
         <meta-data
             android:name="AA_DB_VERSION" android:value="5" />
 
-        <activity android:name=".UI.SplashScreen">
+        <activity android:name=".Main.UI.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

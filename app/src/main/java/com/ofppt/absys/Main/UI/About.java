@@ -1,4 +1,4 @@
-package com.ofppt.absys.UI;
+package com.ofppt.absys.Main.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 

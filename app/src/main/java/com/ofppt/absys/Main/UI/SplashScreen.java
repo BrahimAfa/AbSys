@@ -1,4 +1,4 @@
-package com.ofppt.absys.UI;
+package com.ofppt.absys.Main.UI;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -7,7 +7,6 @@ import android.os.CountDownTimer;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -24,13 +23,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
-import Models.FILIERES;
-import Models.FORMATEURS;
-import Models.GROUPES;
-import Models.STAGIAIRES;
+import com.ofppt.absys.Main.Models.FILIERES;
+import com.ofppt.absys.Main.Models.FORMATEURS;
+import com.ofppt.absys.Main.Models.GROUPES;
 
 public class SplashScreen extends AppCompatActivity {
     FillableLoader fillableLoader;

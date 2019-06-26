@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Settings">
+    tools:context=".Main.UI.Settings">
 
     <ListView
         android:id="@+id/List_Settings"
