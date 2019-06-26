@@ -7,7 +7,7 @@ import com.activeandroid.query.Select;
 
 import java.util.List;
 
-@Table(name = "FILIERES")
+@Table(name = "FILIERES" )
 public class FILIERES extends Model {
 
     @Column(name = "CodeFiliere",unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)

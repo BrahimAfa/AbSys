@@ -8,7 +8,7 @@ import com.activeandroid.query.Select;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "ABSENCES")
+@Table(name = "ABSENCES",id = "idAbsence")
 public class ABSENCES extends Model {
 
     @Column(name = "idAbsence",unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)

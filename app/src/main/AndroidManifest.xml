@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ofppt.absys">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,16 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UI.About"></activity>
-        <activity android:name=".UI.Settings" />
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:theme">
+        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
+        <activity android:name=".UI.About">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ofppt.absys.UI.Settings" />
+        </activity>
+        <activity android:name=".UI.Settings" >
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.ofppt.absys.UI..MainActivity" />-->
+        </activity>
 
         <meta-data
-            android:name="AA_DB_NAME"
-            android:value="Absence" />
+            android:name="AA_MODELS"
+            android:value="com.ofppt.absys.Models.Moduls.FILIERES, com.ofppt.absys.Models.Moduls.GROUPES, com.ofppt.absys.Models.Moduls.STAGIAIRES, com.ofppt.absys.Models.Moduls.FORMATEURS, com.ofppt.absys.Models.Moduls.ABSENCES" />
         <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:name="AA_DB_NAME" android:value="Absence.db" />
+        <meta-data
+            android:name="AA_DB_VERSION" android:value="4" />
 
         <activity android:name=".UI.SplashScreen">
             <intent-filter>
@@ -29,6 +44,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="com.ofppt.absys"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

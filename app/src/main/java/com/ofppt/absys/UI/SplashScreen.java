@@ -1,55 +1,80 @@
 package com.ofppt.absys.UI;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.CountDownTimer;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 
 import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
+import com.activeandroid.query.Select;
 import com.github.jorgecastillo.FillableLoader;
 import com.ofppt.absys.R;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.ArrayList;
+
+import Models.FILIERES;
+import Models.FORMATEURS;
+import Models.GROUPES;
+import Models.STAGIAIRES;
 
 public class SplashScreen extends AppCompatActivity {
     FillableLoader fillableLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActiveAndroid.initialize(this);
+        Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("Absence.db").create();
+        ActiveAndroid.initialize(dbConfiguration);
         setTheme(android.R.style.ThemeOverlay_Material_Dark);
         setContentView(R.layout.activity_splash_screen);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
+        AssetManager assetManager = getAssets();
+        try {
+            Filieres_File = assetManager.open("FILIERES.csv");
+            Groups_File = assetManager.open("GROUPES.csv");
+            Formateur_File = assetManager.open("FORMATEUR.csv");
+        } catch (IOException e) {
+            Log.d("ActiviteMain",e.getMessage());
+        }
+        new Thread(new Runnable() {
+            @Override
+            protected void finalize() throws Throwable {
+                super.finalize();
+            }
+            @Override
+            public void run() {
+                READCSV();
+            }
+        }).start();
         fillableLoader = findViewById(R.id.filableLoader);
         fillableLoader.setSvgPath(OFPPT_PATH);
         Animation fadeIn = new AlphaAnimation(15,0);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
         fadeIn.setDuration(7000);
-
-//        Animation fadeOut = new AlphaAnimation(1, 0);
-//        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-//        fadeOut.setStartOffset(2000);
-//        fadeOut.setDuration(2000);
-
         AnimationSet animation = new AnimationSet(false); //change to false
         animation.addAnimation(fadeIn);
-//        animation.addAnimation(fadeOut);
         fillableLoader.start();
         fillableLoader.setAnimation(animation);
         new CountDownTimer(7000, 1000) {
-
             public void onTick(long millisUntilFinished) {
-
             }
-
             public void onFinish() {
 //                TODO: change the activty
                 Intent intent = new Intent(SplashScreen.this, Settings.class);
@@ -57,11 +82,95 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
             }
         }.start();
-
-
     }
+    public ArrayList<FILIERES> formList = new ArrayList<>();
+    public InputStream Filieres_File;
+    public InputStream Groups_File;
+    public InputStream Formateur_File;
+    private void READCSV(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Filieres_File));
+        try {
+            String[] ids;
+            String csvLine;
+            ActiveAndroid.beginTransaction();
+            while ((csvLine = reader.readLine()) != null) {
+                ids=csvLine.split(",");
+                Log.i("xx", "READCSV: "+ids[0]+" $$ "+ids[1]);
+                FILIERES item = new FILIERES();
+                try{
+                    Log.e("Collumn 1 ",""+ids[0]) ;
+                    item._CodeFiliere = ids[0];
+                    item._Filiere = ids[1];
 
+                    formList.add(item);
+                    item.save();
 
+                }catch (Exception e){
+                    Log.e("Unknown fuck",e.toString());
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }finally {
+            ActiveAndroid.endTransaction();
+        }
+        BufferedReader reader1 = new BufferedReader(new InputStreamReader(Groups_File));
+        try {
+            String[] ids;
+            String csvLine;
+            ActiveAndroid.beginTransaction();
+            while ((csvLine = reader1.readLine()) != null) {
+                ids=csvLine.split(",");
+                Log.i("xx", "READCSV: "+ids[0]+" $$ "+ids[1]);
+                GROUPES item = new GROUPES();
+                try{
+                    Log.e("Collumn 1 ",""+ids[2]) ;
+                    item._CodeGroupe = ids[0];
+                    item._filieres = new Select().from(FILIERES.class).where("CodeFiliere = ?",ids[1]).executeSingle();
+                    item._Annee = Integer.parseInt(ids[2]);
+                    item.save();
+                }catch (Exception e){
+                    Log.e("Unknown fuck2",e.toString());
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }finally {
+            ActiveAndroid.endTransaction();
+        }
+        BufferedReader reader2 = new BufferedReader(new InputStreamReader(Formateur_File));
+        try {
+            String[] ids;
+            String csvLine;
+            ActiveAndroid.beginTransaction();
+            while ((csvLine = reader2.readLine()) != null) {
+                ids=csvLine.split(",");
+                Log.i("xx", "READCSV: "+ids[0]+" $$ "+ids[1]);
+                FORMATEURS item = new FORMATEURS();
+                try{
+                    Log.e("Collumn 1 ",""+ids[0]) ;
+                    item._Matricule = ids[0];
+                    item._Nom = ids[1];
+                    item._Prenom = ids[2];
+                    item._Crypto = ids[3];
+                    item.save();
+
+                }catch (Exception e){
+                    Log.e("Unknown fuck3",e.toString());
+                }
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }finally {
+            ActiveAndroid.endTransaction();
+        }
+    }
     public String OFPPT_PATH = "M 88.00,200.00\n" +
             "           C 89.63,205.42 92.02,206.24 96.00,210.04\n" +
             "             96.00,210.04 117.00,229.08 117.00,229.08\n" +
@@ -512,5 +621,4 @@ public class SplashScreen extends AppCompatActivity {
             "             633.27,466.79 633.02,485.23 621.99,491.99\n" +
             "             616.32,495.47 605.56,494.99 599.00,495.00\n" +
             "             599.00,495.00 582.00,496.00 582.00,496.00 Z";
-
 }
