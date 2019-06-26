@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -80,6 +81,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         }.start();
     }
+
     public ArrayList<FILIERES> formList = new ArrayList<>();
     public InputStream Filieres_File;
     public InputStream Groups_File;
