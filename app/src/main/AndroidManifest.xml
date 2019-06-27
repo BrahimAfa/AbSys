@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ofppt.absys">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,25 +18,31 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
+        <activity android:name=".Main.UI.Absence"></activity>
+        <!--My Lovcal Activitier For Tisting-->
+        <!--<activity android:name=".Main.TestActivities.TestTables" />-->
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
         <activity android:name=".Main.UI.About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ofppt.absys.Main.UI.Settings" />
         </activity>
-        <activity android:name=".Main.UI.Settings" >
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="com.ofppt.absys.UI..MainActivity" />-->
+        <activity android:name=".Main.UI.Settings">
+
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="com.ofppt.absys.UI..MainActivity" /> -->
         </activity>
 
         <meta-data
             android:name="AA_MODELS"
             android:value="com.ofppt.absys.Moduls.FILIERES, com.ofppt.absys.Moduls.GROUPES, com.ofppt.absys.Moduls.STAGIAIRES, com.ofppt.absys.Moduls.FORMATEURS, com.ofppt.absys.Moduls.ABSENCES" />
         <meta-data
-            android:name="AA_DB_NAME" android:value="Absence.db" />
+            android:name="AA_DB_NAME"
+            android:value="Absence.db" />
         <meta-data
-            android:name="AA_DB_VERSION" android:value="5" />
+            android:name="AA_DB_VERSION"
+            android:value="5" />
 
         <activity android:name=".Main.UI.SplashScreen">
             <intent-filter>
@@ -44,6 +51,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="com.ofppt.absys"

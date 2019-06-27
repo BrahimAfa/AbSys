@@ -37,5 +37,11 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
+    //Recycler View
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    //Card View
+    implementation 'androidx.cardview:cardview:1.0.0'
+    //Morphing Button for an animated Loading
+    implementation 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
 
 }
