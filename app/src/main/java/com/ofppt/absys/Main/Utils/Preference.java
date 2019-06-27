@@ -16,17 +16,17 @@ public class Preference {
         }
 
         private Preference(Context context) {
-            sharedPreferences = context.getSharedPreferences("YourCustomNamedPreference",Context.MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences("AbsysSettings",Context.MODE_PRIVATE);
         }
 
         public void saveData(String key,String value) {
             SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
             prefsEditor .putString(key, value);
-            prefsEditor.commit();
+            prefsEditor.apply();
         }
 
         public String getData(String key) {
-            if (sharedPreferences!= null) {
+            if (sharedPreferences!=  null) {
                 return sharedPreferences.getString(key, "");
             }
             return "";
