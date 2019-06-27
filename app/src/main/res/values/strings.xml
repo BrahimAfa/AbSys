@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AbSys</string>
+    <string name="filiere">Filiére :</string>
+    <string name="group">Group :</string>
 </resources>
