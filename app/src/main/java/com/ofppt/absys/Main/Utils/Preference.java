@@ -22,11 +22,11 @@ public class Preference {
         public void saveData(String key,String value) {
             SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
             prefsEditor .putString(key, value);
-            prefsEditor.commit();
+            prefsEditor.apply();
         }
 
         public String getData(String key) {
-            if (sharedPreferences!= null) {
+            if (sharedPreferences!=  null) {
                 return sharedPreferences.getString(key, "");
             }
             return "";
