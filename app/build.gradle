@@ -36,7 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    //Material Design
+    implementation 'com.google.android.material:material:1.1.0-alpha06'
     //Recycler View
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     //Card View
