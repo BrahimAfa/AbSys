@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.activeandroid.query.Select;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.ofppt.absys.Main.Adapters.SettingsAdapter;
+import com.ofppt.absys.Main.TestActivities.TestTables;
 import com.ofppt.absys.R;
 
 import java.io.BufferedReader;
@@ -77,22 +79,29 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        list = findViewById(R.id.List_Settings);
         Items[] weather_data = new Items[]
                 {
                         new Items(R.drawable.ic_down_name, "Export"),
                         new Items(R.drawable.ic_up_name, "Import"),
                         new Items(R.drawable.ic_help_name, "About"),
                         new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur"),
+                        new Items(R.drawable.ic_add_aser, "Test Activity"),
+
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
-        list = findViewById(R.id.List_Settings);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                            ListViewClick(position);
-                                        }
-                                    });
+
+        if (list != null) {
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ListViewClick(position);
+                }
+            });
+        }
+
+
     }
     public void ListViewClick(int pos){
         String xx ="";
@@ -112,6 +121,12 @@ public class Settings extends AppCompatActivity {
                 break;
             case 3:
                 xx = "Add User";
+                break;
+            case 4:
+                xx = "Add User";
+                //TestActivity
+                Intent Itn = new Intent(this, Absence.class);
+                startActivity(Itn);
                 break;
         }
         Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
@@ -152,7 +167,7 @@ public class Settings extends AppCompatActivity {
     public void EXPORTCSV() {
         {
             Date c = Calendar.getInstance().getTime();
-            System.out.println("Current time => " + c);
+            //System.out.println("Current time => " + c);
             SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
             String formattedDate = df.format(c);
             String Named = "AbSys-"+formattedDate+".csv";
