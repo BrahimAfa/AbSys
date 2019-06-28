@@ -8,4 +8,9 @@
         <item name="colorAccent">#65D9FF</item>
     </style>
 
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slidein</item>
+        <item name="android:windowExitAnimation">@anim/slideout</item>
+    </style>
+
 </resources>
