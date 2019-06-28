@@ -139,14 +139,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                        case R.id.CheckSC1:
                            if (compoundButton.isChecked())
                            {
-
                                Constants.CheckedStudentSC1.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
                                  Toast.makeText(_ctx,"Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                            }else {
                                  Toast.makeText(_ctx,"UN Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                                Constants.CheckedStudentSC1.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
-
-
                            }
                            break;
                        case R.id.CheckSC2:
@@ -162,13 +159,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                        default:
                            break;
                    }
-
-
-
         }
     }
-
-
+    //this Overrided Function  determens in which Position we Are position=0 means Header
+    //position>0 means List
     @Override
     public int getItemViewType(int position) {
         if (position==0)
@@ -176,7 +170,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             return Constants.TYPE_HEAD;
         }
         return Constants.TYPE_LIST;
-
     }
 }
 
