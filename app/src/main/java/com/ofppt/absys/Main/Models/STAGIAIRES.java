@@ -36,4 +36,10 @@ public class STAGIAIRES extends Model {
                 .orderBy("Nom ASC")
                 .execute();
     }
+    public static  List<STAGIAIRES> getbyGroup(GROUPES group) {
+        return new Select()
+                       .from(STAGIAIRES.class)
+                       .where("GROUPE = ?", group.getId())
+                       .executeSingle();
+    }
 }

@@ -29,4 +29,10 @@ public class GROUPES extends Model {
                 .from(GROUPES.class)
                 .execute();
     }
+    public static GROUPES getbycodeGroup(String g ) {
+        return new Select()
+                       .from(GROUPES.class)
+                       .where("CodeGroupe = ?", g)
+                       .executeSingle();
+    }
 }

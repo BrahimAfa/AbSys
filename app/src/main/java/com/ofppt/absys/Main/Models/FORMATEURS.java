@@ -36,4 +36,11 @@ public class FORMATEURS extends Model {
                 .orderBy("Nom ASC")
                 .execute();
     }
+
+    public static FORMATEURS getbyCrypte(String Crypte) {
+        return new Select()
+                       .from(FORMATEURS.class)
+                       .where("Crypto = ?", Crypte)
+                       .executeSingle();
+    }
 }
