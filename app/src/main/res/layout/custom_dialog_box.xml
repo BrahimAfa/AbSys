@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <!-- Fragment Header -->
+
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#374C62"
+        >
+            <ImageView android:layout_width="50dp"
+                android:id="@+id/FragClosebtn"
+                android:src="@drawable/ic_close"
+                android:layout_height="50dp"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                />
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RealativL"
+                android:layout_alignParentStart="true"
+
+            >
+                <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_lock"
+                        android:id="@+id/imglock"
+                        android:layout_alignParentStart="true"
+
+
+                />
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Identifiant de Formateur"
+                          android:textSize="25dp"
+                          android:textStyle="bold"
+                          android:id="@+id/txtHeader"
+                          android:layout_toRightOf="@id/imglock"
+                          android:textColor="@android:color/white"
+                          android:layout_centerVertical="true"
+
+                />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="S'il vous plaît entrer votre crypte"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+            android:gravity="center"
+                android:textColor="@color/mb_blue_dark"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:padding="10dp"
+           >
+       <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/txtCrypte"
+               app:endIconMode="password_toggle"
+               app:errorEnabled="true"
+               app:counterMaxLength="50"
+               app:counterEnabled="true"
+               app:errorTextColor="@android:color/holo_red_light"
+               android:hint="Crypt"
+
+
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+       >
+           <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="textPassword"
+
+           />
+
+       </com.google.android.material.textfield.TextInputLayout>
+       <com.dd.morphingbutton.MorphingButton
+               android:id="@+id/btnMorph"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/valider"
+
+               android:gravity="center"
+
+               android:layout_below="@id/txtCrypte"
+               android:layout_centerInParent="true"
+               android:layout_marginTop="14dp"
+               android:background="@color/colorAccent"
+               android:textColor="@android:color/white"
+                />
+   </RelativeLayout>
+
+</LinearLayout>
