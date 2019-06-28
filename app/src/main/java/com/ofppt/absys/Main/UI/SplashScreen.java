@@ -2,8 +2,11 @@ package com.ofppt.absys.Main.UI;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.CountDownTimer;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
 import com.activeandroid.query.Select;
 import com.github.jorgecastillo.FillableLoader;
+import com.ofppt.absys.Main.Utils.SharedPreference;
 import com.ofppt.absys.R;
 
 import java.io.BufferedReader;
@@ -25,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.FORMATEURS;
@@ -32,6 +37,7 @@ import com.ofppt.absys.Main.Models.GROUPES;
 
 public class SplashScreen extends AppCompatActivity {
     FillableLoader fillableLoader;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,10 @@ public class SplashScreen extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        SharedPreference SharedData = SharedPreference.getInstance(SplashScreen.this);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        SharedData.saveData("year",""+year);
+
         AssetManager assetManager = getAssets();
         try {
             Filieres_File = assetManager.open("FILIERES.csv");

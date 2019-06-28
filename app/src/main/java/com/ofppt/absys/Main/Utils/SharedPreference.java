@@ -3,19 +3,19 @@ package com.ofppt.absys.Main.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Preference {
+public class SharedPreference {
 
-        private static Preference Preference;
+        private static SharedPreference Preference;
         private SharedPreferences sharedPreferences;
 
-        public static Preference getInstance(Context context) {
+        public static SharedPreference getInstance(Context context) {
             if (Preference == null) {
-                Preference = new Preference(context);
+                Preference = new SharedPreference(context);
             }
             return Preference;
         }
 
-        private Preference(Context context) {
+        private SharedPreference(Context context) {
             sharedPreferences = context.getSharedPreferences("AbsysSettings",Context.MODE_PRIVATE);
         }
 
