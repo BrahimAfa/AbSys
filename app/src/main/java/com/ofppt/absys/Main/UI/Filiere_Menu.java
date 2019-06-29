@@ -1,5 +1,6 @@
 package com.ofppt.absys.Main.UI;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,9 @@ import com.ofppt.absys.Main.Models.STAGIAIRES;
 import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Utils.SharedPreference;
 import com.ofppt.absys.R;
+
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class Filiere_Menu extends AppCompatActivity {
 
@@ -52,20 +58,27 @@ public class Filiere_Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filiere__menu);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //Action bar name
+        actionBar.setTitle("Filiere");
         SharedPreference SharedData = SharedPreference.getInstance(Filiere_Menu.this);
         TextView year = findViewById(R.id.txtYearf);
         Rview = findViewById(R.id.recycler_filiere);
         Log.e("xxxxx",SharedData.getData("year"));
         String x = SharedData.getData("year");
         year.setText(x);
-        //Action bar name
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Filiere");
         Filiere_Adapter adapter = new Filiere_Adapter(FILIERES.getAll());
         DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
         Rview.setAdapter(adapter);
         Rview.setLayoutManager(new LinearLayoutManager(this));
         Rview.addItemDecoration(divider);
 
+
+
     }
+
+
+
 }

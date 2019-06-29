@@ -1,5 +1,6 @@
 package com.ofppt.absys.Main.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,5 +46,10 @@ public class Groups_Menu extends AppCompatActivity {
         SharedPreference SharedData = SharedPreference.getInstance(Groups_Menu.this);
         TextView year = findViewById(R.id.Yeartxtg);
         year.setText(SharedData.getData("year"));
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //Action bar name
+        actionBar.setTitle("Groups");
     }
 }

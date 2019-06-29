@@ -85,7 +85,7 @@ public class SplashScreen extends AppCompatActivity {
             }
             public void onFinish() {
 //                TODO: change the activty
-                Intent intent = new Intent(SplashScreen.this, Settings.class);
+                Intent intent = new Intent(SplashScreen.this, Filiere_Menu.class);
                 startActivity(intent);
                 finish();
             }
@@ -99,6 +99,7 @@ public class SplashScreen extends AppCompatActivity {
     private void READCSV(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(Filieres_File));
         try {
+
             String[] ids;
             String csvLine;
             ActiveAndroid.beginTransaction();
