@@ -188,15 +188,23 @@ public class Settings extends AppCompatActivity {
                         String[] arr;
                         FileWriter fw = new FileWriter(folder);
                         //TO DO -- Change the Classe to Absence
-                        List<FILIERES> xxc = FILIERES.getAll();
+                        List<ABSENCES> xxc = ABSENCES.getAll();
                         arr = new  String[xxc.size()];
-
+                        String x = "idAbsence";
+                        x+=","+ "CEF";
+                        x+=","+ "Matricule";
+                        x+=","+ "DateAbsence";
+                        x+=","+ "Seance";
+                        fw.append(x).append("\n");
                         for(int i = 0; i < xxc.size();i++ ){
-                            String x = xxc.get(i)._CodeFiliere;
-                            x+=","+ xxc.get(i)._Filiere;
+                            String y = xxc.get(i)._idAbsence.toString();
+                            y+=","+ xxc.get(i)._Stagiere._CEF;
+                            y+=","+ xxc.get(i)._Formateurs._Matricule;
+                            y+=","+ xxc.get(i)._DateAbsence;
+                            y+=","+ xxc.get(i)._Seance;
                             Log.d("xxxix","Ligne Nr: "+i );
-                            arr[i] = x;
-                            fw.append(x).append("\n");
+                            arr[i] = y;
+                            fw.append(y).append("\n");
                         }
                         fw.close();
                     } catch (Exception e) {
