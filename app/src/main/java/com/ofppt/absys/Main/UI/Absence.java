@@ -41,6 +41,8 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
     private RecyclerView Rview;
     private FloatingActionButton fabValidate;
 
+    //Vars
+    List<STAGIAIRES> listG;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -96,7 +98,10 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
             }
         });
 //        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
-        List<STAGIAIRES> listG = STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(Code));
+        listG = STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(Code));
+        InitializingRecyclerView();
+    }
+    private void InitializingRecyclerView(){
         RecyclerAdapter adapter = new RecyclerAdapter(listG,this,this);
         DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
         Rview.setAdapter(adapter);
@@ -146,7 +151,11 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         Toast.makeText(this, formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        InitializingRecyclerView();
+    }
 
     @Override
     public void onClick(int position) {
