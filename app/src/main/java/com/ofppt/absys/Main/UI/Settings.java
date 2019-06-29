@@ -50,6 +50,8 @@ import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.GROUPES;
 import com.ofppt.absys.Main.Models.STAGIAIRES;
 
+import mehdi.sakout.aboutpage.AboutPage;
+
 public class Settings extends AppCompatActivity {
 
     public static final int PERMISSIONS_REQUEST_CODE = 0;
@@ -79,8 +81,6 @@ public class Settings extends AppCompatActivity {
                         new Items(R.drawable.ic_up_name, "Import"),
                         new Items(R.drawable.ic_help_name, "About"),
                         new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur"),
-                        new Items(R.drawable.ic_add_aser, "Test Activity"),
-
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
         ActionBar bar = getSupportActionBar();
@@ -104,34 +104,35 @@ public class Settings extends AppCompatActivity {
 
     }
     public void ListViewClick(int pos){
-        String xx ="";
         switch (pos){
             case 0:
-                xx = "Export";
                 checkPermissionsAndSave();
+                Toast.makeText(this,"Fichier Exporter Avec Sucesse.",Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                xx = "import";
                 checkPermissionsAndOpenFilePicker();
                 break;
             case 2:
-                xx = "import";
-                Intent intent = new Intent(this,About.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this,About.class);
+//                startActivity(intent);
+                View aboutPage = new AboutPage(this)
+                        .isRTL(false)
+                        .setDescription("This is an app to make count for the Absence Made By Achraf Benbamoula && Brahim Afassy")
+                        .addGroup("Connect with us")
+                        .addEmail("FrancXPT@gmail.com")
+                        .addEmail("brahimafassy@gmail.com")
+                        .addWebsite("https://github.com/BrahimAfa/AbSys")
+                        .addGitHub("FrancXPT")
+                        .addGitHub("BrahimAfa")
+                        .create();
+                setContentView(aboutPage);
                 break;
             case 3:
-                xx = "Add User";
                 Intent FormateurInt = new Intent(this, AddFormateur.class);
                 startActivity(FormateurInt);
                 break;
-            case 4:
-                xx = "Add User";
-                //TestActivity
-                Intent Itn = new Intent(this, Absence.class);
-                startActivity(Itn);
-                break;
+
         }
-        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
     }
     public FileReader Absence_File;
     String[] ids;
@@ -182,8 +183,7 @@ public class Settings extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            new Thread() {
-                public void run() {
+
                     try {
                         String[] arr;
                         FileWriter fw = new FileWriter(folder);
@@ -197,40 +197,21 @@ public class Settings extends AppCompatActivity {
                         x+=","+ "Seance";
                         fw.append(x).append("\n");
                         for(int i = 0; i < xxc.size();i++ ){
-                            String y = xxc.get(i)._idAbsence.toString();
+                            String y = xxc.get(i)._idAbsence+"";
                             y+=","+ xxc.get(i)._Stagiere._CEF;
                             y+=","+ xxc.get(i)._Formateurs._Matricule;
                             y+=","+ xxc.get(i)._DateAbsence;
                             y+=","+ xxc.get(i)._Seance;
                             Log.d("xxxix","Ligne Nr: "+i );
-                            arr[i] = y;
                             fw.append(y).append("\n");
                         }
                         fw.close();
                     } catch (Exception e) {
                     }
-                }
-            }.start();
             new Delete().from(ABSENCES.class).execute();
-        }
-    }
-    public String md5(String s) {
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
 
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
 
-            return hexString.toString();
-        }catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
-        return "";
     }
     private void checkPermissionsAndSave() {
         String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -241,7 +222,14 @@ public class Settings extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{permission}, PERMISSIONS_REQUEST_CODE);
             }
         } else {
-           EXPORTCSV();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    EXPORTCSV();
+                }
+
+            }).start();
+
         }
     }
     private void checkPermissionsAndOpenFilePicker() {

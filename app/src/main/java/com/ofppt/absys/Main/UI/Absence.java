@@ -136,10 +136,11 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         }
         for (STAGIAIRES stgS: Constants.CheckedStudentSC1) {
             new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S1).save();
-
+            Log.d("xtr","hello");
         }
         for (STAGIAIRES stgS: Constants.CheckedStudentSC2) {
             new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S2).save();
+            Log.d("xtr","hello2");
 
         }
 
