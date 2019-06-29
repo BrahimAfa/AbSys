@@ -70,7 +70,7 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         ActionBar bar = getSupportActionBar();
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
-
+            bar.setDisplayHomeAsUpEnabled(true);
             // bar.setDisplayShowTitleEnabled();
 
         }

@@ -60,7 +60,13 @@ public class Filiere_Menu extends AppCompatActivity {
         setContentView(R.layout.activity_filiere__menu);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ActionBar bar = getSupportActionBar();
+        if (bar !=null) {
+            bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
+            bar.setDisplayHomeAsUpEnabled(true);
+            // bar.setDisplayShowTitleEnabled();
+
+        }
         //Action bar name
         actionBar.setTitle("Filiere");
         SharedPreference SharedData = SharedPreference.getInstance(Filiere_Menu.this);

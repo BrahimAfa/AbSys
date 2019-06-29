@@ -24,7 +24,13 @@
         <!--My Lovcal Activitier For Tisting-->
         <!--<activity android:name=".Main.TestActivities.TestTables" />-->
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
-        <activity android:name=".Main.UI.Filiere_Menu"/>
+        <activity android:name=".Main.UI.Filiere_Menu">
+            <intent-filter>
+                <category android:name="android.intent.category.HOME" />
+
+
+            </intent-filter>
+        </activity>
         <activity android:name=".Main.UI.Groups_Menu"/>
         <activity android:name=".Main.UI.About">
             <meta-data

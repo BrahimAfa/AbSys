@@ -66,7 +66,14 @@ public class Groups_Menu extends AppCompatActivity {
         String nom = extras.getString("nomf");
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ActionBar bar = getSupportActionBar();
+        if (bar !=null) {
+            bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
+            bar.setDisplayHomeAsUpEnabled(true);
+            // bar.setDisplayShowTitleEnabled();
+            actionBar.setTitle("Groups");
+
+        }
         //Action bar name
         actionBar.setTitle("Groups");
         Rview = findViewById(R.id.recycler_group);

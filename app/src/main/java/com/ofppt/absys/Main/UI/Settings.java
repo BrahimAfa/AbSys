@@ -1,6 +1,7 @@
 package com.ofppt.absys.Main.UI;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -56,6 +57,18 @@ public class Settings extends AppCompatActivity {
     ListView list ;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+
+            // action with ID action_settings was selected
+            default:
+                finish();
+                break;
+        }
+        return true;
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
@@ -70,7 +83,14 @@ public class Settings extends AppCompatActivity {
 
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
+        ActionBar bar = getSupportActionBar();
+        if (bar !=null) {
+            bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
+            bar.setDisplayHomeAsUpEnabled(true);
+            // bar.setDisplayShowTitleEnabled();
+            bar.setTitle("Parametre");
 
+        }
         if (list != null) {
             list.setAdapter(adapter);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
