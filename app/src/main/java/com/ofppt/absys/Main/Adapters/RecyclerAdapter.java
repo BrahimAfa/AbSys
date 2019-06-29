@@ -28,12 +28,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         private List<STAGIAIRES> STAGIAIRES_LIST;
         private  Context ctx;
         private IOnChecked CheckedR;
+        private final boolean[] Seance1State;
+        private final boolean[] Seance2State;
 
     public RecyclerAdapter(List<STAGIAIRES> Stagiaires_List, Context ctx, IOnChecked CheckedResult) {
         STAGIAIRES_LIST = Stagiaires_List;
         this.ctx = ctx;
         this.CheckedR = CheckedResult;
-
+        Seance1State= new boolean[STAGIAIRES_LIST.size()];
+        Seance2State= new boolean[STAGIAIRES_LIST.size()];
     }
 
     @NonNull
@@ -63,7 +66,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         if (viewHolder._ViewType==Constants.TYPE_LIST)
         {
-            viewHolder.Name.setText(STAGIAIRES_LIST.get(i-1)._Nom + " " + STAGIAIRES_LIST.get(i-1)._Prenom);
+            viewHolder.Name.setText(String.format("%s %s", STAGIAIRES_LIST.get(i - 1)._Nom, STAGIAIRES_LIST.get(i - 1)._Prenom));
+            viewHolder.SC1.setChecked(false);
+            viewHolder.SC2.setChecked(false);
+
+            if (Seance1State[i-1])
+            {
+                viewHolder.SC1.setChecked(true);
+            }
+            else {
+                viewHolder.SC1.setChecked(false);
+            }
+            if (Seance2State[i-1])
+            {
+                viewHolder.SC2.setChecked(true);
+
+            }
+            else {
+                viewHolder.SC2.setChecked(false);
+
+            }
             Log.d(TAG, "onBindViewHolder: List");
         }
         else if (viewHolder._ViewType==Constants.TYPE_HEAD)
@@ -139,9 +161,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                        case R.id.CheckSC1:
                            if (compoundButton.isChecked())
                            {
+                               Seance1State[getAdapterPosition()-1] = true;
                                Constants.CheckedStudentSC1.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
                                  Toast.makeText(_ctx,"Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                            }else {
+                               Seance1State[getAdapterPosition()-1] = false;
                                  Toast.makeText(_ctx,"UN Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                                Constants.CheckedStudentSC1.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
                            }
@@ -149,9 +173,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                        case R.id.CheckSC2:
                            if (compoundButton.isChecked())
                            {
+                               Seance2State[getAdapterPosition()-1] = true;
                                Constants.CheckedStudentSC2.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
                                Toast.makeText(_ctx,"Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                            }else {
+                               Seance2State[getAdapterPosition()-1] = false;
                                Toast.makeText(_ctx,"UN Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                                Constants.CheckedStudentSC2.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
                            }
