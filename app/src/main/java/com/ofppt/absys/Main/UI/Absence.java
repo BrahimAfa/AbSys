@@ -96,28 +96,20 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
             }
         });
 //        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
-        List<STAGIAIRES> listG = STAGIAIRES.getAll();
-        List<STAGIAIRES> listd = new ArrayList<>();
-        for(int i =0;i<listG.size();i++){
-            Log.e("xtr", "onCreate: "+i );
-            try {
-            if(listG.get(i)._groupes._CodeGroupe.equals(Code) && listG.get(i)._groupes._CodeGroupe != "" ){
-                Log.e("xxxxx",listG.get(i)._groupes._CodeGroupe+",,"+listG.get(i)._Nom);
-                listd.add(listG.get(i));
-            }
-
-            }catch(Exception e){ }
-
-        }
-        RecyclerAdapter adapter = new RecyclerAdapter(listd,this,this);
+        List<STAGIAIRES> listG = STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(Code));
+        RecyclerAdapter adapter = new RecyclerAdapter(listG,this,this);
         DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
         Rview.setAdapter(adapter);
         Rview.setLayoutManager(new LinearLayoutManager(this));
         Rview.addItemDecoration(divider);
     }
     public void ShowDialog() {
-        ConfirmationDialog confirmD = new ConfirmationDialog();
-        confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
+        if (Constants.CheckedStudentSC1.size()!=0 | Constants.CheckedStudentSC2.size()!=0)
+        {
+            ConfirmationDialog confirmD = new ConfirmationDialog();
+            confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
+        }else Toast.makeText(getApplicationContext(),"Aucune Stagaire Selectioner!!",Toast.LENGTH_LONG).show();
+
 
 
     }
@@ -128,24 +120,30 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
 
         if (Constants.AM_PM==0)
         {
-            S1="S1";
-            S2="S2";
+            S1=Constants.Seance1;
+            S2=Constants.Seance2;
         }else {
-            S1="S3";
-            S2="S4";
+            S1=Constants.Seance3;
+            S2=Constants.Seance4;
         }
-        for (STAGIAIRES stgS: Constants.CheckedStudentSC1) {
-            new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S1).save();
+        ActiveAndroid.beginTransaction();
+        try {
+            for (STAGIAIRES stgS: Constants.CheckedStudentSC1) {
 
+                new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S1).save();
+               stgS.UpdateAbsenceComule();
+
+            }
+            for (STAGIAIRES stgS: Constants.CheckedStudentSC2) {
+                new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S2).save();
+                stgS.UpdateAbsenceComule();
+            }
+            ActiveAndroid.setTransactionSuccessful();
         }
-        for (STAGIAIRES stgS: Constants.CheckedStudentSC2) {
-            new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S2).save();
-
+        finally {
+            ActiveAndroid.endTransaction();
         }
-
         Toast.makeText(this, formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
-
-
     }
 
 

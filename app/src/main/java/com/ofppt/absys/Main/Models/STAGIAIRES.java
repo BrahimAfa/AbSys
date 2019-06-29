@@ -4,6 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
 
 import java.util.List;
 
@@ -37,9 +38,16 @@ public class STAGIAIRES extends Model {
                 .execute();
     }
     public static  List<STAGIAIRES> getbyGroup(GROUPES group) {
-        return new Select()
+            return new Select()
                        .from(STAGIAIRES.class)
                        .where("GROUPE = ?", group.getId())
-                       .executeSingle();
+                       .orderBy("Nom ASC")
+                       .execute();
+    }
+    public  void UpdateAbsenceComule() {
+        new Update(STAGIAIRES.class)
+                       .set("Absence_Cumulee =Absence_Cumulee+1 ")
+                       .where("CEF = ?",this._CEF )
+                       .execute();
     }
 }
