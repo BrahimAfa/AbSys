@@ -60,7 +60,7 @@ public class Filiere_Adapter extends RecyclerView.Adapter<Filiere_Adapter.MyView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),Groups_Menu.class);
-                intent.putExtra("Codef",ff._CodeFiliere);
+                intent.putExtra("codef",ff._CodeFiliere);
                 intent.putExtra("nomf",ff._Filiere);
                 v.getContext().startActivity(intent);
             }

@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Select;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ofppt.absys.Main.Adapters.RecyclerAdapter;
 import com.ofppt.absys.Main.Constants.Constants;
@@ -23,13 +26,18 @@ import com.ofppt.absys.Main.Interfaces.IOnChecked;
 import com.ofppt.absys.Main.Interfaces.IOnInputListenner;
 import com.ofppt.absys.Main.Models.ABSENCES;
 import com.ofppt.absys.Main.Models.FORMATEURS;
+import com.ofppt.absys.Main.Models.GROUPES;
 import com.ofppt.absys.Main.Models.STAGIAIRES;
 import com.ofppt.absys.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Absence extends AppCompatActivity implements IOnInputListenner , IOnChecked {
 
+    TextView group;
+    TextView fili;
     private RecyclerView Rview;
     private FloatingActionButton fabValidate;
 
@@ -66,21 +74,42 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
             // bar.setDisplayShowTitleEnabled();
 
         }
+        group = findViewById(R.id.txtGroup);
+        fili = findViewById(R.id.txtFilier);
         ActiveAndroid.initialize(this);
         Calendar cal = Calendar.getInstance();
         Constants.AM_PM = cal.get(Calendar.AM_PM);
         Rview = findViewById(R.id.recycler_view);
         fabValidate =findViewById(R.id.fabValidate);
+        //Fetching Code Group from intent
 
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String Code = extras.getString("codeg");
+        String fil = extras.getString("Filiere");
+        group.setText(Code);
+        fili.setText(fil);
         fabValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShowDialog();
             }
         });
+//        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
+        List<STAGIAIRES> listG = STAGIAIRES.getAll();
+        List<STAGIAIRES> listd = new ArrayList<>();
+        for(int i =0;i<listG.size();i++){
+            Log.e("xtr", "onCreate: "+i );
+            try {
+            if(listG.get(i)._groupes._CodeGroupe.equals(Code) && listG.get(i)._groupes._CodeGroupe != "" ){
+                Log.e("xxxxx",listG.get(i)._groupes._CodeGroupe+",,"+listG.get(i)._Nom);
+                listd.add(listG.get(i));
+            }
 
+            }catch(Exception e){ }
 
-        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
+        }
+        RecyclerAdapter adapter = new RecyclerAdapter(listd,this,this);
         DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
         Rview.setAdapter(adapter);
         Rview.setLayoutManager(new LinearLayoutManager(this));
@@ -118,6 +147,7 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
 
 
     }
+
 
 
     @Override

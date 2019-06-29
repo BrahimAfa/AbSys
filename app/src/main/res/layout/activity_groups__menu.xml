@@ -70,7 +70,7 @@
         android:layout_below="@id/HeaderCard">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_filiere"
+            android:id="@+id/recycler_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
