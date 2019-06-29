@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Main.UI.AddFormateur">
+    <!--Image Header-->
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardCornerRadius="5dp"
+            android:background="@color/colorPrimary"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/ajouter_fourmateur"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    <!--Edit Texts-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Cardview"
+            app:cardCornerRadius="5dp"
+            android:background="@color/colorPrimary"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="15dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/LinearL"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+
+                <!--Matricule-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtMatricule"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="10"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="@string/matricule"
+                    android:layout_marginTop="1dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--Nom-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtFName"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="30"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="@string/nom"
+                    android:layout_marginTop="10dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--Prenom-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtLName"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="30"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="@string/prenom"
+                    android:layout_marginTop="10dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--Crypte-->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtCrypt"
+                    app:endIconMode="password_toggle"
+                    app:counterMaxLength="50"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="@string/crypt"
+                    android:layout_marginTop="10dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <com.dd.morphingbutton.MorphingButton
+            android:id="@+id/btnMorph"
+            android:layout_width="@dimen/mb_width_200"
+            android:layout_height="wrap_content"
+            android:text="@string/valider"
+            android:layout_below="@id/Cardview"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+</LinearLayout>
