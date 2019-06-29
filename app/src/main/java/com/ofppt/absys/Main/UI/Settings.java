@@ -121,6 +121,8 @@ public class Settings extends AppCompatActivity {
                 break;
             case 3:
                 xx = "Add User";
+                Intent FormateurInt = new Intent(this, AddFormateur.class);
+                startActivity(FormateurInt);
                 break;
             case 4:
                 xx = "Add User";

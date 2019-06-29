@@ -3,4 +3,9 @@
     <string name="filiere">Filiére :</string>
     <string name="group">Group :</string>
     <string name="valider">Valider</string>
+    <string name="ajouter_fourmateur">Ajouter Formateur</string>
+    <string name="matricule">Matricule</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prenom</string>
+    <string name="crypt">Crypt</string>
 </resources>
