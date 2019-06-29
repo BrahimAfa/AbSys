@@ -72,10 +72,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
             if (Seance1State[i-1])
             {
+                //Toast.makeText(this.ctx,"Check S1 in Viewholder box clicked : "+ i,Toast.LENGTH_SHORT).show();
                 viewHolder.SC1.setChecked(true);
             }
             else {
                 viewHolder.SC1.setChecked(false);
+                //Toast.makeText(this.ctx,"UnCheck S1 in Viewholder box clicked : "+ i,Toast.LENGTH_SHORT).show();
+
             }
             if (Seance2State[i-1])
             {
@@ -84,7 +87,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
             else {
                 viewHolder.SC2.setChecked(false);
-
             }
             Log.d(TAG, "onBindViewHolder: List");
         }
@@ -161,26 +163,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                        case R.id.CheckSC1:
                            if (compoundButton.isChecked())
                            {
-                               Seance1State[getAdapterPosition()-1] = true;
-                               Constants.CheckedStudentSC1.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
-                                 Toast.makeText(_ctx,"Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                               if (!Seance1State[getAdapterPosition()-1]){
+                                     Seance1State[getAdapterPosition()-1] = true;
+                                   Constants.CheckedStudentSC1.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
+                                   Toast.makeText(_ctx,"Check S1 box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                               }
                            }else {
-                               Seance1State[getAdapterPosition()-1] = false;
-                                 Toast.makeText(_ctx,"UN Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
-                               Constants.CheckedStudentSC1.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
-                           }
+                               if (Seance1State[getAdapterPosition()-1]){
+                                    Seance1State[getAdapterPosition()-1] = false;
+                                    Toast.makeText(_ctx,"UN Check S1 box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                                    Constants.CheckedStudentSC1.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
+                           }}
                            break;
                        case R.id.CheckSC2:
                            if (compoundButton.isChecked())
                            {
+                               if (!Seance2State[getAdapterPosition()-1]){
                                Seance2State[getAdapterPosition()-1] = true;
                                Constants.CheckedStudentSC2.add(STAGIAIRES_LIST.get(getAdapterPosition()-1));
-                               Toast.makeText(_ctx,"Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
-                           }else {
+                               Toast.makeText(_ctx,"Check S2 box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                           }}else {
+                               if (Seance2State[getAdapterPosition()-1]){
                                Seance2State[getAdapterPosition()-1] = false;
-                               Toast.makeText(_ctx,"UN Check box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                               Toast.makeText(_ctx,"UN Check S2 box clicked : "+ getAdapterPosition(),Toast.LENGTH_SHORT).show();
                                Constants.CheckedStudentSC2.remove(STAGIAIRES_LIST.get(getAdapterPosition()-1));
-                           }
+                           }}
                            break;
                        default:
                            break;
