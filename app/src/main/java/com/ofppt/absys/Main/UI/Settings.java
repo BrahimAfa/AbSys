@@ -127,7 +127,7 @@ public class Settings extends AppCompatActivity {
             case 4:
                 xx = "Add User";
                 //TestActivity
-                Intent Itn = new Intent(this, TestTables.class);
+                Intent Itn = new Intent(this, Absence.class);
                 startActivity(Itn);
                 break;
         }
