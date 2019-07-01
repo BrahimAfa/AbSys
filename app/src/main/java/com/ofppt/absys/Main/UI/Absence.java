@@ -73,6 +73,8 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
             bar.setDisplayHomeAsUpEnabled(true);
+            bar.setTitle("Affectation d'Absence");
+
             // bar.setDisplayShowTitleEnabled();
 
         }
@@ -148,6 +150,8 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         finally {
             ActiveAndroid.endTransaction();
         }
+        Constants.CheckedStudentSC1.clear();
+        Constants.CheckedStudentSC1.clear();
         Toast.makeText(this, formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
     }
 

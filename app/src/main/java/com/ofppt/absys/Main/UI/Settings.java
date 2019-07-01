@@ -113,6 +113,15 @@ public class Settings extends AppCompatActivity {
                 xx = "Export";
                 checkPermissionsAndSave();
                 Toast.makeText(this,"Fichier Exporter Avec Sucesse.",Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                xx = "import";
+                checkPermissionsAndOpenFilePicker();
+                break;
+            case 2:
+                xx = "import";
+//                Intent intent = new Intent(this,About.class);
+//                startActivity(intent);
                 View aboutPage = new AboutPage(this)
                                          .isRTL(false)
                                          .setDescription("This is an app to make count for the Absence Made By Achraf Benbamoula && Brahim Afassy")
@@ -125,15 +134,6 @@ public class Settings extends AppCompatActivity {
                                          .create();
                 setContentView(aboutPage);
                 break;
-            case 1:
-                xx = "import";
-                checkPermissionsAndOpenFilePicker();
-                break;
-            case 2:
-                xx = "import";
-                Intent intent = new Intent(this,About.class);
-                startActivity(intent);
-                break;
             case 3:
                 xx = "Add User";
                 Intent FormateurInt = new Intent(this, AddFormateur.class);
@@ -142,7 +142,7 @@ public class Settings extends AppCompatActivity {
             case 4:
                 xx = "Add User";
                 //TestActivity
-                Intent Itn = new Intent(this, Absence.class);
+                Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
                 break;
         }
