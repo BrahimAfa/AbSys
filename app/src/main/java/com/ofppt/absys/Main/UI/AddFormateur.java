@@ -1,9 +1,11 @@
 package com.ofppt.absys.Main.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,6 +34,12 @@ public class AddFormateur extends AppCompatActivity {
     private int mMorphCounter=1;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_formateur);
@@ -41,7 +49,15 @@ public class AddFormateur extends AppCompatActivity {
         txtLNam = findViewById(R.id.txtLName);
         txtMatricule = findViewById(R.id.txtMatricule);
         btnValider = findViewById(R.id.btnMorph);
+        //Changing the Action Bar with Added Back Button
+        ActionBar bar = getSupportActionBar();
+        if (bar !=null) {
+            bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
+            bar.setDisplayHomeAsUpEnabled(true);
+            // bar.setDisplayShowTitleEnabled();
+            bar.setTitle("Formateur");
 
+        }
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
