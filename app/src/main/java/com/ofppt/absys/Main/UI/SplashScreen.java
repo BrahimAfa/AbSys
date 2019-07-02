@@ -84,6 +84,7 @@ public class SplashScreen extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
+//                TODO: change the activty
                 Intent intent = new Intent(SplashScreen.this, Filiere_Menu.class);
                 startActivity(intent);
                 finish();

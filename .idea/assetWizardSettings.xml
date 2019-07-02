@@ -55,8 +55,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\FrancXPT\Downloads\icons8-error-96.png" />
-                                      <entry key="outputName" value="error_icon" />
+                                      <entry key="imageAsset" value="D:\Backup\Desktop\add_user_male_96px.png" />
+                                      <entry key="outputName" value="ic_lock" />
+                                      <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>
