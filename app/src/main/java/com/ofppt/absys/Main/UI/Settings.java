@@ -2,16 +2,19 @@ package com.ofppt.absys.Main.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
@@ -61,14 +64,7 @@ public class Settings extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // action with ID action_refresh was selected
-
-            // action with ID action_settings was selected
-            default:
-                finish();
-                break;
-        }
+        finish();
         return true;
     }
     @Override
@@ -112,14 +108,13 @@ public class Settings extends AppCompatActivity {
             case 0:
                 xx = "Export";
                 checkPermissionsAndSave();
-                Toast.makeText(this,"Fichier Exporter Avec Sucesse.",Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                 xx = "import";
                 checkPermissionsAndOpenFilePicker();
                 break;
             case 2:
-                xx = "import";
+                xx = "About";
 //                Intent intent = new Intent(this,About.class);
 //                startActivity(intent);
                 View aboutPage = new AboutPage(this)
@@ -140,13 +135,13 @@ public class Settings extends AppCompatActivity {
                 startActivity(FormateurInt);
                 break;
             case 4:
-                xx = "Add User";
+                xx = "Test Page";
                 //TestActivity
                 Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
                 break;
         }
-        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
     }
     public FileReader Absence_File;
     String[] ids;
@@ -200,7 +195,6 @@ public class Settings extends AppCompatActivity {
                     try {
                         String[] arr;
                         FileWriter fw = new FileWriter(folder);
-                        //TO DO -- Change the Classe to Absence
                         List<ABSENCES> xxc = ABSENCES.getAll();
                         arr = new  String[xxc.size()];
                         String x = "idAbsence";
@@ -221,7 +215,7 @@ public class Settings extends AppCompatActivity {
                         fw.close();
                     } catch (Exception e) {
                     }
-            new Delete().from(ABSENCES.class).execute();
+
         }
     }
     private void checkPermissionsAndSave() {
@@ -233,6 +227,19 @@ public class Settings extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{permission}, PERMISSIONS_REQUEST_CODE);
             }
         } else {
+            boolean x = false;
+            AlertDialog.Builder xx = new AlertDialog.Builder(this);
+            xx.setTitle("Absence")
+                    .setMessage("Voulez vous Supprimer la list des Absence du base Donner?")
+                    .setIcon(R.drawable.error_icon)
+                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            //Clear the table if you Clicked Yes
+                            deleteAb();
+                        }})
+                    .setNegativeButton("Non", null);
+            AlertDialog dialog = xx.create();
+            dialog.show();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -240,7 +247,18 @@ public class Settings extends AppCompatActivity {
                 }
 
             }).start();
+
         }
+    }
+    private void deleteAb(){
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                Log.d("xxx","Deleted");
+                new Delete().from(ABSENCES.class).execute();
+            }
+        }.start();
     }
     private void checkPermissionsAndOpenFilePicker() {
         String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -290,7 +308,6 @@ public class Settings extends AppCompatActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(this, "Picked file: " + path, Toast.LENGTH_LONG).show();
                 final ProgressDialog dialog=new ProgressDialog(this);
                 dialog.setMessage("Importation......");
                 dialog.setCancelable(false);
