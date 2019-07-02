@@ -58,17 +58,14 @@ public class Filiere_Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filiere__menu);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
         ActionBar bar = getSupportActionBar();
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
-            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setTitle("Filiere");
             // bar.setDisplayShowTitleEnabled();
 
         }
         //Action bar name
-        actionBar.setTitle("Filiere");
         SharedPreference SharedData = SharedPreference.getInstance(Filiere_Menu.this);
         TextView year = findViewById(R.id.txtYearf);
         Rview = findViewById(R.id.recycler_filiere);
