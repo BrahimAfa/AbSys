@@ -31,7 +31,7 @@
                 <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_lock"
+                        android:src="@android:drawable/ic_lock_lock"
                         android:id="@+id/imglock"
                         android:layout_alignParentStart="true"
 
