@@ -1,6 +1,7 @@
 package com.ofppt.absys.Main.UI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -37,6 +38,7 @@ import com.ofppt.absys.Main.Models.GROUPES;
 
 public class SplashScreen extends AppCompatActivity {
     FillableLoader fillableLoader;
+    SharedPreferences prefs = null;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class SplashScreen extends AppCompatActivity {
         SharedPreference SharedData = SharedPreference.getInstance(SplashScreen.this);
         int year = Calendar.getInstance().get(Calendar.YEAR);
         SharedData.saveData("year",""+year);
-
+        prefs = getSharedPreferences("com.Ofppt.Absys", MODE_PRIVATE);
         AssetManager assetManager = getAssets();
         try {
             Filieres_File = assetManager.open("FILIERES.csv");
@@ -61,16 +63,16 @@ public class SplashScreen extends AppCompatActivity {
         } catch (IOException e) {
             Log.d("ActiviteMain",e.getMessage());
         }
-        new Thread(new Runnable() {
-            @Override
-            protected void finalize() throws Throwable {
-                super.finalize();
-            }
-            @Override
-            public void run() {
-                READCSV();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            protected void finalize() throws Throwable {
+//                super.finalize();
+//            }
+//            @Override
+//            public void run() {
+//                READCSV();
+//            }
+//        }).start();
         fillableLoader = findViewById(R.id.filableLoader);
         fillableLoader.setSvgPath(OFPPT_PATH);
         Animation fadeIn = new AlphaAnimation(15,0);
@@ -89,6 +91,26 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
             }
         }.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            new Thread(new Runnable() {
+                @Override
+                protected void finalize() throws Throwable {
+                    super.finalize();
+                }
+                @Override
+                public void run() {
+                    READCSV();
+                }
+            }).start();
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
     }
 
     public ArrayList<FILIERES> formList = new ArrayList<>();
