@@ -84,7 +84,7 @@ public class AddFiliere extends AppCompatActivity {
                             new FILIERES(CodeF,Fname).save();
                             mMorphCounter=0;
 
-                            Toast.makeText(getApplicationContext(), "Formateur a Bien Ajouter", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Filiere a Bien Ajouter", Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
