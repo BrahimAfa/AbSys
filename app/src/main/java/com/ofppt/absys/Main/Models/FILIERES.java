@@ -20,6 +20,11 @@ public class FILIERES extends Model {
         super();
     }
 
+    public FILIERES(String _CodeFiliere, String _Filiere) {
+        this._CodeFiliere = _CodeFiliere;
+        this._Filiere = _Filiere;
+    }
+
     public static List<FILIERES> getAll() {
         return new Select()
                 .from(FILIERES.class)

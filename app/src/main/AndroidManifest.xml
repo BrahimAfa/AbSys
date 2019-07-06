@@ -18,21 +18,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
-        <activity android:name=".Main.UI.Absence" android:theme="@style/Theme.MaterialComponents.Light">
-
-        </activity>
-        <!--My Lovcal Activitier For Tisting-->
+        <activity android:name=".Main.UI.AddGroup"></activity>
+        <activity
+            android:name=".Main.UI.AddFiliere"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity
+            android:name=".Main.UI.Absence"
+            android:theme="@style/Theme.MaterialComponents.Light" /> <!-- My Lovcal Activitier For Tisting -->
         <activity android:name=".Main.TestActivities.TestTables" />
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
         <activity android:name=".Main.UI.Filiere_Menu">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
-
-
             </intent-filter>
         </activity>
-        <activity android:name=".Main.UI.AddFormateur" android:theme="@style/Theme.MaterialComponents.Light"/>
-        <activity android:name=".Main.UI.Groups_Menu"/>
+        <activity
+            android:name=".Main.UI.AddFormateur"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity android:name=".Main.UI.Groups_Menu" />
         <activity android:name=".Main.UI.About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

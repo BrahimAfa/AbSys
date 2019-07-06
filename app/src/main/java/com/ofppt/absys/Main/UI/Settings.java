@@ -12,13 +12,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,16 +38,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import com.ofppt.absys.Main.Models.ABSENCES;
-import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.GROUPES;
 import com.ofppt.absys.Main.Models.STAGIAIRES;
 
@@ -79,6 +72,8 @@ public class Settings extends AppCompatActivity {
                         new Items(R.drawable.ic_help_name, "About"),
                         new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur"),
                         new Items(R.drawable.ic_add_aser, "Test Activity"),
+                        new Items(R.drawable.add_fil, "Ajouter Une Filiere"),
+                        new Items(R.drawable.add_group, "Ajouter Un Group"),
 
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
@@ -139,6 +134,12 @@ public class Settings extends AppCompatActivity {
                 //TestActivity
                 Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
+                break;
+                case 5:
+                xx = "Test Page";
+                //ADD Filiere
+                Intent Fil = new Intent(this, AddFiliere.class);
+                startActivity(Fil);
                 break;
         }
 //        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();

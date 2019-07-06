@@ -59,22 +59,22 @@ public class AddFormateur extends AppCompatActivity {
 
         }
         btnValider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        @Override
+        public void onClick(View v) {
 
-                Matricule = Objects.requireNonNull(txtMatricule.getEditText(),"Matricule EditeText Is NUll").getText().toString();
-               // Log.d(TAG, "onClick: "+Matricule);
-                Fname = Objects.requireNonNull(txtFNam.getEditText(),"First Name EditeText Is NUll").getText().toString();
-                //Log.d(TAG, "onClick: "+Fname);
-                Lname = Objects.requireNonNull(txtLNam.getEditText(),"Last Name EditeText Is NUll").getText().toString();
-               // Log.d(TAG, "onClick: "+Lname);
-                Crypt = Objects.requireNonNull(txtCrypt.getEditText(),"Crypte EditeText Is NUll").getText().toString();
-               // Log.d(TAG, "onClick: "+Crypt);
+            Matricule = Objects.requireNonNull(txtMatricule.getEditText(),"Matricule EditeText Is NUll").getText().toString();
+            // Log.d(TAG, "onClick: "+Matricule);
+            Fname = Objects.requireNonNull(txtFNam.getEditText(),"First Name EditeText Is NUll").getText().toString();
+            //Log.d(TAG, "onClick: "+Fname);
+            Lname = Objects.requireNonNull(txtLNam.getEditText(),"Last Name EditeText Is NUll").getText().toString();
+            // Log.d(TAG, "onClick: "+Lname);
+            Crypt = Objects.requireNonNull(txtCrypt.getEditText(),"Crypte EditeText Is NUll").getText().toString();
+            // Log.d(TAG, "onClick: "+Crypt);
 
-                AjouterFormateur(btnValider);
-            }
-        });
-    }
+            AjouterFormateur(btnValider);
+        }
+    });
+}
 
     private void AjouterFormateur(final MorphingButton btnMorph) {
         if (mMorphCounter == 0) {

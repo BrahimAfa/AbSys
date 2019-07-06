@@ -8,4 +8,5 @@
     <string name="nom">Nom</string>
     <string name="prenom">Prenom</string>
     <string name="crypt">Crypt</string>
+    <string name="ajouter_filiere">Ajouter Filiere</string>
 </resources>
