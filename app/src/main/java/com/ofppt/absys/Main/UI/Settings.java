@@ -114,8 +114,6 @@ public class Settings extends AppCompatActivity {
                 break;
             case 7:
                 xx = "About";
-//                Intent intent = new Intent(this,About.class);
-//                startActivity(intent);
                 View aboutPage = new AboutPage(this)
                                          .isRTL(false)
                                          .setDescription("This is an app to Observe Students Absence For ISTA AGADIR Made By Achraf Benbamoula && Brahim Afassy \n © BBA")
@@ -135,24 +133,20 @@ public class Settings extends AppCompatActivity {
                 break;
             case 9:
                 xx = "Test Page";
-                //TestActivity
                 Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
                 break;
                 case 4:
                 xx = "Filiere Add Page";
-                //ADD Filiere
                 Intent Fil = new Intent(this, AddFiliere.class);
                 startActivity(Fil);
                 break;
             case 5:
                 xx = "Group Add Page";
-                //ADD Group
                 Intent GRp = new Intent(this, AddGroup.class);
                 startActivity(GRp);
                 break;
         }
-//        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();
     }
     public FileReader Absence_File;
     String[] ids;
