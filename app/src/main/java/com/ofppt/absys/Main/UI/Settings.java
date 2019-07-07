@@ -67,13 +67,17 @@ public class Settings extends AppCompatActivity {
         list = findViewById(R.id.List_Settings);
         Items[] weather_data = new Items[]
                 {
-                        new Items(R.drawable.ic_down_name, "Export"),
-                        new Items(R.drawable.ic_up_name, "Import"),
-                        new Items(R.drawable.ic_help_name, "About"),
-                        new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur"),
-                        new Items(R.drawable.ic_add_aser, "Test Activity"),
-                        new Items(R.drawable.add_fil, "Ajouter Une Filiere"),
-                        new Items(R.drawable.add_group, "Ajouter Un Group"),
+                        //True if its just a section
+                        new Items(R.drawable.ic_help_name, "Manipulation des Donner",true),
+                        new Items(R.drawable.ic_down_name, "Export",false),
+                        new Items(R.drawable.ic_up_name, "Import",false),
+                        new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur",false),
+                        new Items(R.drawable.add_fil, "Ajouter Une Filiere",false),
+                        new Items(R.drawable.add_group, "Ajouter Un Group",false),
+                        new Items(R.drawable.ic_help_name, "Information",true),
+                        new Items(R.drawable.ic_help_name, "About",false),
+                        new Items(R.drawable.add_group, "Test",true),
+                        new Items(R.drawable.ic_add_aser, "Test Activity",false),
 
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
@@ -100,15 +104,15 @@ public class Settings extends AppCompatActivity {
     public void ListViewClick(int pos){
         String xx ="";
         switch (pos){
-            case 0:
+            case 1:
                 xx = "Export";
                 checkPermissionsAndSave();
                 break;
-            case 1:
+            case 2:
                 xx = "import";
                 checkPermissionsAndOpenFilePicker();
                 break;
-            case 2:
+            case 7:
                 xx = "About";
 //                Intent intent = new Intent(this,About.class);
 //                startActivity(intent);
@@ -129,19 +133,19 @@ public class Settings extends AppCompatActivity {
                 Intent FormateurInt = new Intent(this, AddFormateur.class);
                 startActivity(FormateurInt);
                 break;
-            case 4:
+            case 9:
                 xx = "Test Page";
                 //TestActivity
                 Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
                 break;
-                case 5:
+                case 4:
                 xx = "Filiere Add Page";
                 //ADD Filiere
                 Intent Fil = new Intent(this, AddFiliere.class);
                 startActivity(Fil);
                 break;
-            case 6:
+            case 5:
                 xx = "Group Add Page";
                 //ADD Group
                 Intent GRp = new Intent(this, AddGroup.class);

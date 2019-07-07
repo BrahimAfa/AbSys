@@ -11,5 +11,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#007BC2</color>
     <color name="actionbarendcolor">#65D9FF</color>
+    <color name="sectionx">#1F6F6F</color>
+
 
 </resources>
