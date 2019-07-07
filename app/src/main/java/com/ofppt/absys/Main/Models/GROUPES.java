@@ -24,6 +24,12 @@ public class GROUPES extends Model {
         super();
     }
 
+    public GROUPES(String _CodeGroupe, FILIERES _filieres, int _Annee) {
+        this._CodeGroupe = _CodeGroupe;
+        this._filieres = _filieres;
+        this._Annee = _Annee;
+    }
+
     public static List<GROUPES> getAll() {
         return new Select()
                 .from(GROUPES.class)

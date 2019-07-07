@@ -24,7 +24,12 @@ public class FILIERES extends Model {
         this._CodeFiliere = _CodeFiliere;
         this._Filiere = _Filiere;
     }
-
+    public static FILIERES getByCodeFiliere(String f){
+        return new Select()
+                .from(FILIERES.class)
+                .where("CodeFiliere = ?", f)
+                .executeSingle();
+    }
     public static List<FILIERES> getAll() {
         return new Select()
                 .from(FILIERES.class)

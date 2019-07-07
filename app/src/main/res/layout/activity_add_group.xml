@@ -1,9 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Main.UI.AddGroup">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Text Header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Cardview"
+            app:cardCornerRadius="5dp"
+            android:background="@color/colorPrimary"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="15dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/LinearL"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                >
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="5dp"
+                    android:background="@color/colorPrimary"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="15dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ajouter_group"
+                        android:fontFamily="monospace"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:layout_gravity="center"/>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    <!--Inputs Card-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:id="@+id/Cardss"
+            android:background="@color/colorPrimary"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:id="@+id/LinearLa"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/Filier_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="10"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    android:id="@+id/CodeGr"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="Code Group"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="1dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:counterMaxLength="4"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:errorTextColor="@android:color/holo_red_light"
+                    android:hint="Annee"
+                    android:id="@+id/AnneeGr"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="10dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.dd.morphingbutton.MorphingButton
+            android:id="@+id/btnGr"
+            android:layout_width="@dimen/mb_width_200"
+            android:layout_height="wrap_content"
+            android:text="@string/valider"
+            android:layout_below="@id/Cardss"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</LinearLayout>

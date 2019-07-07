@@ -114,7 +114,7 @@ public class Settings extends AppCompatActivity {
 //                startActivity(intent);
                 View aboutPage = new AboutPage(this)
                                          .isRTL(false)
-                                         .setDescription("This is an app to make count for the Absence Made By Achraf Benbamoula && Brahim Afassy")
+                                         .setDescription("This is an app to Observe Students Absence For ISTA AGADIR Made By Achraf Benbamoula && Brahim Afassy \n © BBA")
                                          .addGroup("Connect with us")
                                          .addEmail("FrancXPT@gmail.com")
                                          .addEmail("brahimafassy@gmail.com")
@@ -136,10 +136,16 @@ public class Settings extends AppCompatActivity {
                 startActivity(Itn);
                 break;
                 case 5:
-                xx = "Test Page";
+                xx = "Filiere Add Page";
                 //ADD Filiere
                 Intent Fil = new Intent(this, AddFiliere.class);
                 startActivity(Fil);
+                break;
+            case 6:
+                xx = "Group Add Page";
+                //ADD Group
+                Intent GRp = new Intent(this, AddGroup.class);
+                startActivity(GRp);
                 break;
         }
 //        Toast.makeText(this,"position :"+xx,Toast.LENGTH_SHORT).show();

@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
-        <activity android:name=".Main.UI.AddGroup"></activity>
+        <activity
+            android:name=".Main.UI.AddGroup"
+            android:theme="@style/Theme.MaterialComponents.Light" />
         <activity
             android:name=".Main.UI.AddFiliere"
             android:theme="@style/Theme.MaterialComponents.Light" />

@@ -9,4 +9,5 @@
     <string name="prenom">Prenom</string>
     <string name="crypt">Crypt</string>
     <string name="ajouter_filiere">Ajouter Filiere</string>
+    <string name="ajouter_group">Ajouter Group</string>
 </resources>
