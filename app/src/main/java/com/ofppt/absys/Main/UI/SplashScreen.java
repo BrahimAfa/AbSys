@@ -82,7 +82,7 @@ public class SplashScreen extends AppCompatActivity {
         animation.addAnimation(fadeIn);
         fillableLoader.start();
         fillableLoader.setAnimation(animation);
-        new CountDownTimer(7000, 1000) {
+        new CountDownTimer(6100, 1000) {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
