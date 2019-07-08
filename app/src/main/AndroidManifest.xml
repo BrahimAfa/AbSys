@@ -19,51 +19,70 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
         <activity
-            android:screenOrientation="portrait"
+            android:name=".Main.UI.ModFiliere"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity
             android:name=".Main.UI.AddGroup"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.Light" />
         <activity
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"
             android:name=".Main.UI.AddFiliere"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.Light" />
         <activity
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"
             android:name=".Main.UI.Absence"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.Light" /> <!-- My Lovcal Activitier For Tisting -->
-        <activity android:name=".Main.TestActivities.TestTables"
+        <activity
+            android:name=".Main.TestActivities.TestTables"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".Main.UI.Filiere_Menu"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:theme="@style/Theme.MaterialComponents.Light" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main.UI.Filiere_Menu"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Main.UI.AddFormateur"
-            android:theme="@style/Theme.MaterialComponents.Light"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".Main.UI.Groups_Menu"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity
+            android:name=".Main.UI.Groups_Menu"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".Main.UI.About"-->
+            <!--android:configChanges="orientation|keyboardHidden"-->
+            <!--android:screenOrientation="portrait">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.ofppt.absys.Main.UI.Settings" />-->
+        <!--</activity>-->
+        <activity
+            android:name=".Main.UI.Settings"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".Main.UI.About"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ofppt.absys.Main.UI.Settings" />
-        </activity>
-        <activity android:name=".Main.UI.Settings"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+            android:theme="@style/Theme.MaterialComponents.Light">
 
             <!-- <meta-data -->
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
@@ -80,9 +99,10 @@
             android:name="AA_DB_VERSION"
             android:value="1" />
 
-        <activity android:name=".Main.UI.SplashScreen"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
+        <activity
+            android:name=".Main.UI.SplashScreen"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

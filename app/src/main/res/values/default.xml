@@ -3,8 +3,8 @@
     <color name="mb_white">#ffffff</color>
     <color name="mb_blue">#ff0099cc</color>
     <color name="mb_blue_dark">#ff00719b</color>
-    <color name="mb_purple">#ffaa66cc</color>
-    <color name="mb_purple_dark">#ff8855aa</color>
+    <color name="mb_purple">#65D9FF</color>
+    <color name="mb_purple_dark">#65D9FF</color>
     <color name="mb_green">#ff99cc00</color>
     <color name="mb_green_dark">#ff6d9b00</color>
     <color name="mb_red">#ffff4444</color>

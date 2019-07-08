@@ -10,4 +10,5 @@
     <string name="crypt">Crypt</string>
     <string name="ajouter_filiere">Ajouter Filiere</string>
     <string name="ajouter_group">Ajouter Group</string>
+    <string name="modifier_une_filiere">Modifier Une Filiere</string>
 </resources>

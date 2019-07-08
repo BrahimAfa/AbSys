@@ -61,7 +61,7 @@ public class SettingsAdapter extends ArrayAdapter<Items> {
                 // Changes the height and width to the specified *pixels*
                 params.height = 100;
                 holder.layout.setLayoutParams(params);
-                holder.txtTitle.setTextSize(18);
+                holder.txtTitle.setTextSize(15);
                 holder.txtTitle.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 holder.imgIcon.setImageResource(0);
             }

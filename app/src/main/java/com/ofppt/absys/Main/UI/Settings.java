@@ -1,6 +1,7 @@
 package com.ofppt.absys.Main.UI;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +13,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +28,8 @@ import android.widget.Toast;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.ofppt.absys.Main.Adapters.SettingsAdapter;
@@ -49,7 +54,7 @@ import com.ofppt.absys.Main.Models.STAGIAIRES;
 
 import mehdi.sakout.aboutpage.AboutPage;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends AppCompatActivity implements View.OnClickListener{
 
     public static final int PERMISSIONS_REQUEST_CODE = 0;
     public static final int FILE_PICKER_REQUEST_CODE = 1;
@@ -74,6 +79,8 @@ public class Settings extends AppCompatActivity {
                         new Items(R.drawable.ic_add_aser, "Ajouter Un Formateur",false),
                         new Items(R.drawable.add_fil, "Ajouter Une Filiere",false),
                         new Items(R.drawable.add_group, "Ajouter Un Group",false),
+                        new Items(R.drawable.ic_help_name, "Modification des Donner",true),
+                        new Items(R.drawable.add_fil, "Modifier Une Filiere",false),
                         new Items(R.drawable.ic_help_name, "Information",true),
                         new Items(R.drawable.ic_help_name, "About",false),
                         new Items(R.drawable.add_group, "Test",true),
@@ -81,6 +88,7 @@ public class Settings extends AppCompatActivity {
 
                 };
         SettingsAdapter adapter = new SettingsAdapter(this, R.layout.listview_item_row, weather_data);
+        createBottomSheetDialog();
         ActionBar bar = getSupportActionBar();
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
@@ -101,6 +109,9 @@ public class Settings extends AppCompatActivity {
 
 
     }
+
+
+
     public void ListViewClick(int pos){
         String xx ="";
         switch (pos){
@@ -112,7 +123,7 @@ public class Settings extends AppCompatActivity {
                 xx = "import";
                 checkPermissionsAndOpenFilePicker();
                 break;
-            case 7:
+            case 9:
                 xx = "About";
                 View aboutPage = new AboutPage(this)
                                          .isRTL(false)
@@ -131,7 +142,11 @@ public class Settings extends AppCompatActivity {
                 Intent FormateurInt = new Intent(this, AddFormateur.class);
                 startActivity(FormateurInt);
                 break;
-            case 9:
+                case 7:
+                xx = "MOdifier Filiere";
+                    bottomSheetDialog.show();
+                break;
+            case 11:
                 xx = "Test Page";
                 Intent Itn = new Intent(this, TestTables.class);
                 startActivity(Itn);
@@ -330,6 +345,38 @@ public class Settings extends AppCompatActivity {
                     }
                 }).start();
             }
+        }
+    }
+    //The Modification Code
+    BottomSheetDialog bottomSheetDialog;
+    MaterialButton xrem;
+    MaterialButton xem ;
+    private void createBottomSheetDialog() {
+        if (bottomSheetDialog == null) {
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_modal, null);
+            xrem = view.findViewById(R.id.Button_1);
+            xem = view.findViewById(R.id.Button_2);
+
+            xrem.setOnClickListener(this);
+            xem.setOnClickListener(this);
+            bottomSheetDialog = new BottomSheetDialog(this);
+            bottomSheetDialog.setContentView(view);
+        }
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.Button_1:
+//                Comule.setText("btn1");
+                Intent intent = new Intent(this, ModFiliere.class);
+                startActivity(intent);
+                bottomSheetDialog.dismiss();
+                break;
+            case R.id.Button_2:
+                com.activeandroid.util.Log.e("xxx","Hello Bitch button 2");
+
+                bottomSheetDialog.dismiss();
+                break;
         }
     }
 }
