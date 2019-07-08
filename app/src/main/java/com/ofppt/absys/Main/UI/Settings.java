@@ -373,7 +373,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
                 bottomSheetDialog.dismiss();
                 break;
             case R.id.Button_2:
-                com.activeandroid.util.Log.e("xxx","Hello Bitch button 2");
+                Log.e("xxx","Hello Bitch button 2");
 
                 bottomSheetDialog.dismiss();
                 break;
