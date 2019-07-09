@@ -363,6 +363,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             bottomSheetDialog.setContentView(view);
         }
     }
+    //Hndling Clicks of the bottom sheet
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
