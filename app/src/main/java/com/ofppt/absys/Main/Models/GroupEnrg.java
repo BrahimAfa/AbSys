@@ -20,10 +20,14 @@ public class GroupEnrg extends Model{
     @Column(name = "Seance")
     public String _Seance;
 
-    public GroupEnrg(GROUPES _Group, Date _DateAbsence, String _Seance) {
+    @Column(name = "Formateur")
+    public FORMATEURS _Formateur;
+
+    public GroupEnrg(GROUPES _Group, Date _DateAbsence, String _Seance, FORMATEURS _Formateur) {
         this._Group = _Group;
         this._DateAbsence = _DateAbsence;
         this._Seance = _Seance;
+        this._Formateur = _Formateur;
     }
 
     public GroupEnrg() {
