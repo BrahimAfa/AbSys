@@ -46,7 +46,7 @@ public class STAGIAIRES extends Model {
     }
     public  void UpdateAbsenceComule() {
         new Update(STAGIAIRES.class)
-                       .set("Absence_Cumulee =Absence_Cumulee+1 ")
+                       .set("Absence_Cumulee =Absence_Cumulee+2.5 ")
                        .where("CEF = ?",this._CEF )
                        .execute();
     }
