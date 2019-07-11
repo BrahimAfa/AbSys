@@ -20,7 +20,7 @@
             app:cardCornerRadius="5dp"
             android:background="@color/colorPrimary"
             app:cardElevation="2dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="8dp"
             android:id="@+id/HeaderCard"
             android:layout_weight="1"
             >
@@ -82,10 +82,30 @@
 
 
         </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="dropdown_menu"
+        android:hint="Formateur"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="1dp"
+
+        >
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FormateurComplete"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
+        android:layout_marginTop="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
         android:id="@+id/RviewCard"
