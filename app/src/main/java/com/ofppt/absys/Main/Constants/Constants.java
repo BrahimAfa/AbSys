@@ -1,5 +1,6 @@
 package com.ofppt.absys.Main.Constants;
 
+import com.ofppt.absys.Main.Models.FORMATEURS;
 import com.ofppt.absys.Main.Models.STAGIAIRES;
 
 import java.util.ArrayList;
@@ -10,7 +11,10 @@ public class Constants {
     public static final List<STAGIAIRES> CheckedStudentSC2 = new ArrayList<>();
     public static final int TYPE_HEAD = 0;
     public static final int TYPE_LIST = 1;
+    public static Boolean AucunSc1State = false;
+    public static Boolean AucunSc2State = false;
     public static   int AM_PM = -1;
+    public static FORMATEURS FOMATEUR;
     public static  final String Seance1 = "S1";
     public static  final String Seance2 = "S2";
     public static  final String Seance3 = "S3";

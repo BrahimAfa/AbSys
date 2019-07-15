@@ -44,5 +44,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     //Morphing Button for an animated Loading
     implementation 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
-
+    //Searchable Spinner
+    implementation 'com.github.MdFarhanRaja:SearchableSpinner:2.0'
 }

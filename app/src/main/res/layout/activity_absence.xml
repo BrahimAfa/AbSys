@@ -86,19 +86,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:endIconMode="dropdown_menu"
+        app:endIconMode="none"
         android:hint="Formateur"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="1dp"
-
-        >
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:layout_marginTop="1dp">
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/FormateurComplete"
             android:paddingLeft="5dp"
             android:singleLine="true"
-
             />
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.cardview.widget.CardView

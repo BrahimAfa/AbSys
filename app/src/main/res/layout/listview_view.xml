@@ -26,10 +26,18 @@
         android:text="Nom Prénom"
         android:textSize="20sp"
         android:textColor="@android:color/black"
-        android:layout_weight = "8"
+        android:layout_weight = "6"
         android:id="@+id/Nom"
         />
-
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_weight = "2"
+        android:id="@+id/AbsencComulee"
+        />
 
     <CheckBox
         android:layout_width="wrap_content"

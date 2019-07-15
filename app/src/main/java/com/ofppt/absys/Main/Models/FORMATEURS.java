@@ -1,10 +1,13 @@
 package com.ofppt.absys.Main.Models;
 
+import android.provider.BaseColumns;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "FORMATEURS")
@@ -35,6 +38,14 @@ public class FORMATEURS extends Model {
                 .from(FORMATEURS.class)
                 .orderBy("Nom ASC")
                 .execute();
+    }
+    public static List<String> getAllNmaes() {
+        List<String> NamesList = new ArrayList<>();
+        List<FORMATEURS> Flist = getAll();
+        for (FORMATEURS f : Flist) {
+            NamesList.add(String.format("%s %s", f._Nom, f._Prenom));
+        }
+        return NamesList;
     }
 
     public static FORMATEURS getbyCrypte(String Crypte) {

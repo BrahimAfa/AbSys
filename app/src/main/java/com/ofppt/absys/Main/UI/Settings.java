@@ -33,6 +33,7 @@ import com.google.android.material.button.MaterialButton;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.ofppt.absys.Main.Adapters.SettingsAdapter;
+import com.ofppt.absys.Main.Models.GroupEnrg;
 import com.ofppt.absys.Main.TestActivities.TestTables;
 import com.ofppt.absys.Main.Utils.HelperUtils;
 import com.ofppt.absys.R;
@@ -196,7 +197,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             ActiveAndroid.endTransaction();
         }
     }
-    public void EXPORTCSV() {
+    public void EXPORTCSV(boolean deleted) {
         {
             Date c = Calendar.getInstance().getTime();
             //System.out.println("Current time => " + c);
@@ -213,12 +214,13 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
                 }
             }
                     try {
-                        String[] arr;
+                     //   String[] arr;
                         FileWriter fw = new FileWriter(folder);
                         List<ABSENCES> xxc = ABSENCES.getAll();
-                        arr = new  String[xxc.size()];
+                       // arr = new  String[xxc.size()];
                         String x = "idAbsence";
                         x+=","+ "CEF";
+                        x+=","+ "Group";
                         x+=","+ "Matricule";
                         x+=","+ "DateAbsence";
                         x+=","+ "Seance";
@@ -226,13 +228,38 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
                         for(int i = 0; i < xxc.size();i++ ){
                             String y = xxc.get(i).getId()+"";
                             y+=","+ xxc.get(i)._Stagiere._CEF;
+                            y+=","+ xxc.get(i)._Stagiere._groupes._CodeGroupe;
                             y+=","+ xxc.get(i)._Formateurs._Matricule;
                             y+=","+ HelperUtils.DateFormatter(xxc.get(i)._DateAbsence);
                             y+=","+ xxc.get(i)._Seance;
-                            Log.d("xxxix","Ligne Nr: "+i );
+                            Log.d("xxxxAB","Ligne Nr: "+i+":  "+y );
                             fw.append(y).append("\n");
                         }
+                        fw.append("-_-,-_-,-_-,-_-,-_-").append("\n");
+                      //     String[] arr;*
+//                        // arr = new  String[xxc.size()];
+                        List<GroupEnrg> Groupenrg = GroupEnrg.getAll();
+                        String x2 = "idGroupENrg";
+                        x2+=","+ "GroupAb";
+                        x2+=","+ "Formateur";
+                        x2+=","+ "DateAbsence";
+                        x2+=","+ "Seance";
+                        fw.append(x2).append("\n");
+
+                        for(int i = 0; i < Groupenrg.size();i++ ){
+                            String Y2 = Groupenrg.get(i).getId()+"";
+                            Y2+=","+ Groupenrg.get(i)._Group._CodeGroupe;
+                            Y2+=","+ Groupenrg.get(i)._Formateur._Matricule;
+                           Y2+=","+ HelperUtils.DateFormatter(Groupenrg.get(i)._DateAbsence);
+                            Y2+=","+ Groupenrg.get(i)._Seance;
+                            Log.d("xxxGR","Ligne Nr: "+i+"  "+Y2);
+                            fw.append(Y2).append("\n");
+                        }
                         fw.close();
+                        if (deleted) {
+                            deleteAb();
+
+                        }
                     } catch (Exception e) {
                     }
 
@@ -255,30 +282,43 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             //Clear the table if you Clicked Yes
-                            deleteAb();
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    EXPORTCSV(true);
+                                }
+
+                                @Override
+                                protected void finalize() throws Throwable {
+                                    super.finalize();
+                                    Log.e("zzzz", "finalize: Done" );
+                                }
+                            }).start();
                         }})
-                    .setNegativeButton("Non", null);
+                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    EXPORTCSV(false);
+                                }
+
+                            }).start();
+                        }
+                    });
             AlertDialog dialog = xx.create();
             dialog.show();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    EXPORTCSV();
-                }
 
-            }).start();
 
         }
     }
     private void deleteAb(){
-        new CountDownTimer(10000, 1000) {
-            public void onTick(long millisUntilFinished) {
-            }
-            public void onFinish() {
                 Log.d("xxx","Deleted");
                 new Delete().from(ABSENCES.class).execute();
-            }
-        }.start();
+                new Delete().from(GroupEnrg.class).execute();
+
     }
     private void checkPermissionsAndOpenFilePicker() {
         String permission = Manifest.permission.READ_EXTERNAL_STORAGE;

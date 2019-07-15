@@ -4,18 +4,25 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.util.Log;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.FORMATEURS;
 import com.ofppt.absys.Main.Models.GROUPES;
@@ -28,6 +35,8 @@ public class TestTables extends AppCompatActivity implements View.OnClickListene
     TextView txtgroup;
     TextView txtfilier;
     TextView Comule;
+    TextInputLayout gg;
+    AutoCompleteTextView FormateurSpinner;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
@@ -37,12 +46,14 @@ public class TestTables extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_tables);
+        ActiveAndroid.initialize(this);
         txtformateur= findViewById(R.id.txtformateur);
         txtgroup= findViewById(R.id.txtgroup);
         txtfilier= findViewById(R.id.txtfilier);
         Comule = findViewById(R.id.txtfAbcenceComule);
         txtformateur.setText(String.valueOf(FORMATEURS.getAll().size()));
         txtgroup.setText(String.valueOf(GROUPES.getAll().size()));
+   //     FormateurSpinner = findViewById(R.id.FormateurSpinner);
         txtfilier.setText(String.valueOf(STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup("TDI202")).size()));
         double I=0;
         for (STAGIAIRES stg : STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup("TDI202"))) {
@@ -52,11 +63,12 @@ public class TestTables extends AppCompatActivity implements View.OnClickListene
         ActionBar bar = getSupportActionBar();
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
-            bar.setDisplayHomeAsUpEnabled(true);
-            // bar.setDisplayShowTitleEnabled();
+            bar.setDisplayHomeAsUpEnabled(true) ;
+            // bar.setDisplyShowTitleEnabled();
             bar.setTitle("Parametre");
 
         }
+
 
         MaterialButton xtrem = findViewById(R.id.Test_Option_Btn);
         createBottomSheetDialog();

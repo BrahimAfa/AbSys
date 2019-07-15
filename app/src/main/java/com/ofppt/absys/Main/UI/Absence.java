@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +39,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+
 public class Absence extends AppCompatActivity implements IOnInputListenner , IOnChecked {
 
     TextView group;
     TextView fili;
+    SpinnerDialog spinnerDialog;
     private RecyclerView Rview;
     private FloatingActionButton fabValidate;
-    private AutoCompleteTextView FormateurComplete;
+    private EditText FormateurComplete;
     String ExtraCodeGoup;
     //Vars
     List<STAGIAIRES> listG;
+    ArrayList<String> FormateurNames;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -109,15 +115,33 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
 //        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
         listG = STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(ExtraCodeGoup));
         InitializingRecyclerView();
-        FormateurComplete.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FORMATEURS.getAllNmaes()));
-
-        FormateurComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        FormateurNames= new ArrayList<>();
+        FormateurNames.addAll(FORMATEURS.getAllNmaes());
+    //    FormateurComplete.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FORMATEURS.getAllNmaes()));
+        spinnerDialog=new SpinnerDialog(Absence.this,FormateurNames,"Selectioner Formateur",R.style.DialogAnimations_SmileWindow,"FERMER");// With 	Animation
+        spinnerDialog.setCancellable(true); // for cancellable
+        spinnerDialog.setShowKeyboard(false);// for open keyboard by default
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(String item, int position) {
+                Toast.makeText(Absence.this, item + "  " + position+"", Toast.LENGTH_SHORT).show();
+                FormateurComplete.setText(item );
                 Constants.FOMATEUR = FORMATEURS.getAll().get(position);
-                Toast.makeText(getApplicationContext(),Constants.FOMATEUR._Nom+" " +Constants.FOMATEUR._Prenom+"Test",Toast.LENGTH_LONG).show();
             }
         });
+        FormateurComplete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        spinnerDialog.showSpinerDialog();
+    }
+});
+//        FormateurComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Constants.FOMATEUR = FORMATEURS.getAll().get(position);
+//                Toast.makeText(getApplicationContext(),Constants.FOMATEUR._Nom+" " +Constants.FOMATEUR._Prenom+"Test",Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
     private void InitializingRecyclerView(){
         RecyclerAdapter adapter = new RecyclerAdapter(listG,this,this);
@@ -176,36 +200,45 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         }
         ActiveAndroid.beginTransaction();
         try {
+            //If This Us True The Constants.CheckedStudentSC1.size() is ALways 0
             if (Constants.AucunSc1State) {
                 new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR).save();
             }
             if ( Constants.CheckedStudentSC1.size()>0) {
+                GroupEnrg G_Enrg = new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR);
+                G_Enrg.save();
                 for (STAGIAIRES stgS: Constants.CheckedStudentSC1) {
-                    new ABSENCES(stgS,formateur,Calendar.getInstance().getTime(),S1).save();
+                    ABSENCES Ab = new ABSENCES(stgS,Constants.FOMATEUR,Calendar.getInstance().getTime(),S1);
+                    Ab.save();
                     stgS.UpdateAbsenceComule();
                 }
-                new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR).save();
-
+             //   new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR).save();
             }
+
+            //If This Us True The Constants.CheckedStudentSC2.size() is ALways 0
+
             if (Constants.AucunSc2State) {
                 new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S2,Constants.FOMATEUR).save();
             }
             if (Constants.CheckedStudentSC2.size() > 0) {
-
+                GroupEnrg G_Enrg = new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S2,Constants.FOMATEUR);
+                G_Enrg.save();
                 for (STAGIAIRES stgS : Constants.CheckedStudentSC2) {
-                    new ABSENCES(stgS, formateur, Calendar.getInstance().getTime(), S2).save();
-                    stgS.UpdateAbsenceComule();
-                    new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S2,Constants.FOMATEUR).save();
 
+                    new ABSENCES(stgS, Constants.FOMATEUR, Calendar.getInstance().getTime(), S2).save();
+                    stgS.UpdateAbsenceComule();
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
+
         }
         finally {
             ActiveAndroid.endTransaction();
         }
         Constants.CheckedStudentSC1.clear();
         Constants.CheckedStudentSC1.clear();
+        Toast.makeText(getApplicationContext(),ABSENCES.getAll().size()+"",Toast.LENGTH_LONG).show();
+
         Toast.makeText(this, formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
     }
 

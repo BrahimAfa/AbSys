@@ -12,5 +12,9 @@
         <item name="android:windowEnterAnimation">@anim/slidein</item>
         <item name="android:windowExitAnimation">@anim/slideout</item>
     </style>
-
+    <style name="DialogAnimations" />
+    <style name="DialogAnimations.SmileWindow">
+        <item name="android:windowEnterAnimation">@anim/slidein</item>
+        <item name="android:windowExitAnimation">@anim/slideout</item>
+    </style>
 </resources>

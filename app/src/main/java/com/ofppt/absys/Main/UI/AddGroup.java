@@ -59,7 +59,6 @@ public class AddGroup extends AppCompatActivity {
         for(int i=0;i<Fill.size();i++){
             CodeFF[i]= Fill.get(i)._CodeFiliere;
         }
-
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(AddGroup.this,android.R.layout.simple_spinner_item, CodeFF);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         FilierSp.setAdapter(adapter);

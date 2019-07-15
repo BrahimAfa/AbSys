@@ -26,12 +26,13 @@ public class ABSENCES extends Model {
     @Column(name = "Seance")
     public String _Seance;
 
-    public ABSENCES( STAGIAIRES _Stagiere, FORMATEURS _Formateurs, Date _DateAbsence, String _Seance) {
+    public ABSENCES(STAGIAIRES _Stagiere, FORMATEURS _Formateurs, Date _DateAbsence, String _Seance) {
 
         this._Stagiere = _Stagiere;
         this._Formateurs = _Formateurs;
         this._DateAbsence = _DateAbsence;
         this._Seance = _Seance;
+
     }
 
     public ABSENCES() {
