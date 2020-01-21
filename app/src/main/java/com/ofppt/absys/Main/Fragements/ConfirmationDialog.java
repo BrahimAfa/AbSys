@@ -96,9 +96,7 @@ public class ConfirmationDialog extends DialogFragment {
                     txtCrypte.setError("Acune Formateur avec cette Crypte!!!!");
                 }
 
-
         }
-
 
     }
     @Override
@@ -109,14 +107,16 @@ public class ConfirmationDialog extends DialogFragment {
     }
     private boolean IsFormateurExist() {
         String Crypte ="";
+
         try {
             Crypte = AESCrypt.encrypt(InputCrypte);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        formateur = FORMATEURS.getbyCrypte(Crypte);
 
+        formateur = FORMATEURS.getbyCrypte(Crypte);
         return formateur != null;
+
     }
 
     private boolean Validate_Crypte(MorphingButton btnMorph){

@@ -4,32 +4,24 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.util.Log;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.FORMATEURS;
 import com.ofppt.absys.Main.Models.GROUPES;
 import com.ofppt.absys.Main.Models.STAGIAIRES;
 import com.ofppt.absys.Main.UI.ModFiliere;
+import com.ofppt.absys.Main.Utils.AESCrypt;
 import com.ofppt.absys.R;
-
 public class TestTables extends AppCompatActivity implements View.OnClickListener{
     TextView txtformateur;
     TextView txtgroup;
@@ -51,8 +43,12 @@ public class TestTables extends AppCompatActivity implements View.OnClickListene
         txtgroup= findViewById(R.id.txtgroup);
         txtfilier= findViewById(R.id.txtfilier);
         Comule = findViewById(R.id.txtfAbcenceComule);
-        txtformateur.setText(String.valueOf(FORMATEURS.getAll().size()));
-        txtgroup.setText(String.valueOf(GROUPES.getAll().size()));
+        try {
+            txtformateur.setText(AESCrypt.decrypt(FORMATEURS.getAll().get(1)._Crypto));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        txtgroup.setText(FORMATEURS.getAll().get(1)._Crypto);
    //     FormateurSpinner = findViewById(R.id.FormateurSpinner);
         txtfilier.setText(String.valueOf(STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup("TDI202")).size()));
         double I=0;

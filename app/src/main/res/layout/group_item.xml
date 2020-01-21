@@ -21,6 +21,7 @@
         android:layout_alignParentTop="true"
         android:textColor="#000"
         android:textSize="16dp"
+        android:padding="10dp"
         android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

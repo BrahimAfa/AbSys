@@ -2,6 +2,7 @@ package com.ofppt.absys.Main.UI;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,17 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.activeandroid.query.Select;
-import com.ofppt.absys.Main.Adapters.Filiere_Adapter;
 import com.ofppt.absys.Main.Adapters.Group_Adapter;
-import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Models.GROUPES;
 import com.ofppt.absys.Main.Utils.SharedPreference;
 import com.ofppt.absys.R;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 

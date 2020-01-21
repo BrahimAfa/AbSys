@@ -8,20 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.query.Select;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ofppt.absys.Main.Adapters.RecyclerAdapter;
 import com.ofppt.absys.Main.Constants.Constants;
@@ -52,8 +47,8 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
     private EditText FormateurComplete;
     String ExtraCodeGoup;
     //Vars
-    List<STAGIAIRES> listG;
-    ArrayList<String> FormateurNames;
+   // List<STAGIAIRES> listG;
+  //  ArrayList<String> FormateurNames;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -80,51 +75,51 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_absence);
+        //change actionbar color from SOLID to Gradient
         ActionBar bar = getSupportActionBar();
         if (bar !=null) {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
             bar.setDisplayHomeAsUpEnabled(true);
             bar.setTitle("Affectation d'Absence");
-
-            // bar.setDisplayShowTitleEnabled();
-
         }
+        //init active android ORM
+        ActiveAndroid.initialize(this);
+
         group = findViewById(R.id.txtGroup);
         fili = findViewById(R.id.txtFilier);
         FormateurComplete = findViewById(R.id.FormateurComplete);
-
-        ActiveAndroid.initialize(this);
+        //get the current time (morning or evening ) to define which seance is it now (S1,S2 or S3,S4)
         Calendar cal = Calendar.getInstance();
         Constants.AM_PM = cal.get(Calendar.AM_PM);
+
         Rview = findViewById(R.id.recycler_view);
         fabValidate =findViewById(R.id.fabValidate);
-        //Fetching Code Group from intent
-
+        //Fetching Code Group and from intent
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        ExtraCodeGoup = extras.getString("codeg");
-        String fil = extras.getString("Filiere");
+        //getString function may return null pointer reference
+        ExtraCodeGoup = extras != null ? extras.getString("codeg") : null;
+        String filiere = extras != null ? extras.getString("Filiere") : null;
         group.setText(ExtraCodeGoup);
-        fili.setText(fil);
+        fili.setText(filiere);
+        //Professor dialog box
         fabValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShowDialog();
             }
         });
-//        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getAll(),this,this);
-        listG = STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(ExtraCodeGoup));
+        //IMPORTANT TRY TO FIGURE AWAY TO REMOVE THIS LISTG FROM GLOBAL VARIABLE
+       // listG =
         InitializingRecyclerView();
-        FormateurNames= new ArrayList<>();
-        FormateurNames.addAll(FORMATEURS.getAllNmaes());
-    //    FormateurComplete.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FORMATEURS.getAllNmaes()));
-        spinnerDialog=new SpinnerDialog(Absence.this,FormateurNames,"Selectioner Formateur",R.style.DialogAnimations_SmileWindow,"FERMER");// With 	Animation
+        //Searchable spinner "Professors Spinner"
+        spinnerDialog=new SpinnerDialog(Absence.this,(ArrayList<String>) FORMATEURS.getAllNmaes(),"Selectioner Formateur",R.style.DialogAnimations_SmileWindow,"FERMER");// With 	Animation
         spinnerDialog.setCancellable(true); // for cancellable
         spinnerDialog.setShowKeyboard(false);// for open keyboard by default
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
-                Toast.makeText(Absence.this, item + "  " + position+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), item + "  " + position+"", Toast.LENGTH_SHORT).show();
                 FormateurComplete.setText(item );
                 Constants.FOMATEUR = FORMATEURS.getAll().get(position);
             }
@@ -135,16 +130,10 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         spinnerDialog.showSpinerDialog();
     }
 });
-//        FormateurComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Constants.FOMATEUR = FORMATEURS.getAll().get(position);
-//                Toast.makeText(getApplicationContext(),Constants.FOMATEUR._Nom+" " +Constants.FOMATEUR._Prenom+"Test",Toast.LENGTH_LONG).show();
-//            }
-//        });
     }
+
     private void InitializingRecyclerView(){
-        RecyclerAdapter adapter = new RecyclerAdapter(listG,this,this);
+        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(ExtraCodeGoup)),this,this);
         DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
         Rview.setAdapter(adapter);
         Rview.setLayoutManager(new LinearLayoutManager(this));
@@ -154,54 +143,64 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
         Constants.AucunSc1State = false;
         Constants.AucunSc2State = false;
     }
-    private void InitializingRecyclerView(String Seance,boolean checkState){
-        RecyclerAdapter adapter = new RecyclerAdapter(listG,this,this,Seance,checkState);
-      //  DividerItemDecoration divider = new DividerItemDecoration(this,new LinearLayoutManager(this).getOrientation());
+    // this it should be removed because its the same one as above and only thing changed is the seance parameter which is useless
+    //(check the RecyclerAdapter Constructor)
+    private void InitializingRecyclerView(String Seance){
+        RecyclerAdapter adapter = new RecyclerAdapter(STAGIAIRES.getbyGroup(GROUPES.getbycodeGroup(ExtraCodeGoup)),this,this,Seance);
         Rview.setAdapter(adapter);
-   //     Rview.setLayoutManager(new LinearLayoutManager(this));
-      //  Rview.addItemDecoration(divider);
         Constants.CheckedStudentSC1.clear();
         Constants.CheckedStudentSC2.clear();
     }
+
     public void ShowDialog() {
+        //showing dialog confirmation based on the following conditions
+        //no one is absent in both first and second seance
         if (Constants.AucunSc1State & Constants.AucunSc2State) {
             ConfirmationDialog confirmD = new ConfirmationDialog();
             confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
         }
+        //no one is absent in first seance and there is someone absent in the second seance
         else if (Constants.AucunSc1State & Constants.CheckedStudentSC2.size() > 0) {
             ConfirmationDialog confirmD = new ConfirmationDialog();
             confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
         }
+        //no one is absent in second seance and there is someone absent in the first seance
         else if (Constants.AucunSc2State & Constants.CheckedStudentSC1.size() > 0) {
             ConfirmationDialog confirmD = new ConfirmationDialog();
             confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
         }
-        else if (Constants.CheckedStudentSC1.size()!=0 | Constants.CheckedStudentSC2.size()!=0)
-        {
+        //there is someone absent in both in both first and second seance
+        else if (Constants.CheckedStudentSC1.size()>0 && Constants.CheckedStudentSC2.size()>0) {
             ConfirmationDialog confirmD = new ConfirmationDialog();
             confirmD.show(getSupportFragmentManager(),"Confirmation Dialog");
-        }else Toast.makeText(getApplicationContext(),"Aucune Stagaire Selectioner!!",Toast.LENGTH_LONG).show();
-
-
-
+        } else Toast.makeText(getApplicationContext(),"Aucune Stagaire Selectioner!!",Toast.LENGTH_LONG).show();
     }
+
     @Override
     public void SendFormateur(FORMATEURS formateur) {
+        //this function is been trigger by the dialog fragment if the Professor is been selected or found
+        //this two variables used to determine which seance this absence is been submitted
         String S1;
         String S2 ;
-
-        if (Constants.AM_PM==0)
-        {
+        if (Constants.AM_PM==0) {
             S1=Constants.Seance1;
             S2=Constants.Seance2;
-        }else {
+        }
+        else {
             S1=Constants.Seance3;
             S2=Constants.Seance4;
         }
         ActiveAndroid.beginTransaction();
         try {
-            //If This Us True The Constants.CheckedStudentSC1.size() is ALways 0
+            //this iff statement is used to make sure that the absence is been affected ()
+            /*
+            * in normal cases you can leave the check boxes of the students unchecked (which means no one is absent)
+            * but to make sure that the one who is using this app is doing his job he should select the Aucun checkbox(in FOOTER)
+            * so that the while exporting absence data this group will appear as it's been visited but there is no absence
+            */
+
             if (Constants.AucunSc1State) {
+                //here instead of Constants.FOMATEUR i have to pass the formateur parameter but for testing reasons
                 new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR).save();
             }
             if ( Constants.CheckedStudentSC1.size()>0) {
@@ -210,13 +209,10 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
                 for (STAGIAIRES stgS: Constants.CheckedStudentSC1) {
                     ABSENCES Ab = new ABSENCES(stgS,Constants.FOMATEUR,Calendar.getInstance().getTime(),S1);
                     Ab.save();
+                    //this function update the current absence for this student by adding 2.5H
                     stgS.UpdateAbsenceComule();
                 }
-             //   new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S1,Constants.FOMATEUR).save();
             }
-
-            //If This Us True The Constants.CheckedStudentSC2.size() is ALways 0
-
             if (Constants.AucunSc2State) {
                 new GroupEnrg(GROUPES.getbycodeGroup(ExtraCodeGoup),Calendar.getInstance().getTime(),S2,Constants.FOMATEUR).save();
             }
@@ -230,16 +226,15 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
-
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
         }
         finally {
             ActiveAndroid.endTransaction();
         }
-        Constants.CheckedStudentSC1.clear();
-        Constants.CheckedStudentSC1.clear();
-        Toast.makeText(getApplicationContext(),ABSENCES.getAll().size()+"",Toast.LENGTH_LONG).show();
-
-        Toast.makeText(this, formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
+        InitializingRecyclerView();
+        Toast.makeText(this, "Absence Submitted by : MR."+formateur._Nom+"  " +formateur._Prenom,Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -249,29 +244,14 @@ public class Absence extends AppCompatActivity implements IOnInputListenner , IO
     }
 
     @Override
-    public void onClick(int position) {
-
-    }
-
-    @Override
-    public void OnChecked(int position) {
-
-    }
-
-    @Override
     public void OnAucunCheckedSC1(Boolean CheckState) {
-        Toast.makeText(this,"Test Acune SC1",Toast.LENGTH_SHORT).show();
-        InitializingRecyclerView(Constants.Seance1,CheckState);
-        Constants.CheckedStudentSC1.clear();
-
+        Toast.makeText(this,"Test Acune SC1 "+CheckState,Toast.LENGTH_SHORT).show();
+        InitializingRecyclerView(Constants.Seance1);
     }
 
     @Override
     public void OnAucunCheckedSC2(Boolean CheckState) {
-        Toast.makeText(this,"Test Acune SC2",Toast.LENGTH_SHORT).show();
-        InitializingRecyclerView(Constants.Seance2,CheckState);
-        Constants.CheckedStudentSC2.clear();
-
-
+        Toast.makeText(this,"Test Acune SC2 "+CheckState,Toast.LENGTH_SHORT).show();
+        InitializingRecyclerView(Constants.Seance2);
     }
 }

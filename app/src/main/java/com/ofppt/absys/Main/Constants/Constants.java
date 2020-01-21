@@ -11,8 +11,8 @@ public class Constants {
     public static final List<STAGIAIRES> CheckedStudentSC2 = new ArrayList<>();
     public static final int TYPE_HEAD = 0;
     public static final int TYPE_LIST = 1;
-    public static Boolean AucunSc1State = false;
-    public static Boolean AucunSc2State = false;
+    public static Boolean AucunSc1State;
+    public static Boolean AucunSc2State;
     public static   int AM_PM = -1;
     public static FORMATEURS FOMATEUR;
     public static  final String Seance1 = "S1";

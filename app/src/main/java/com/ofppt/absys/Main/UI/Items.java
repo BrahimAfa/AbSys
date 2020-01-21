@@ -4,10 +4,7 @@ public class Items {
         public int icon;
         public String title;
         public boolean Sec;
-        public Items(){
-            super();
-        }
-
+        //public Items(){}
         public Items(int icon, String title,Boolean sec) {
             super();
             this.icon = icon;

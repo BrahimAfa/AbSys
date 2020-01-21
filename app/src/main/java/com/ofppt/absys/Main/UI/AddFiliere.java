@@ -12,8 +12,6 @@ import android.widget.Toast;
 import com.dd.morphingbutton.MorphingButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ofppt.absys.Main.Models.FILIERES;
-import com.ofppt.absys.Main.Models.FORMATEURS;
-import com.ofppt.absys.Main.Utils.AESCrypt;
 import com.ofppt.absys.R;
 
 import java.util.Objects;

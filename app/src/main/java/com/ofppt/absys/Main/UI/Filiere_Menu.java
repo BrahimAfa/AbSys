@@ -1,6 +1,5 @@
 package com.ofppt.absys.Main.UI;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -14,21 +13,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ofppt.absys.Main.Adapters.Filiere_Adapter;
-import com.ofppt.absys.Main.Adapters.RecyclerAdapter;
-import com.ofppt.absys.Main.Models.STAGIAIRES;
 import com.ofppt.absys.Main.Models.FILIERES;
 import com.ofppt.absys.Main.Utils.SharedPreference;
 import com.ofppt.absys.R;
-
-import static android.widget.Toast.LENGTH_LONG;
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class Filiere_Menu extends AppCompatActivity {
 
@@ -83,7 +74,6 @@ public class Filiere_Menu extends AppCompatActivity {
             bar.setBackgroundDrawable(getDrawable(R.drawable.actionbar_gradient));
             bar.setTitle("Filiere");
             // bar.setDisplayShowTitleEnabled();
-
         }
         //Action bar name
         SharedPreference SharedData = SharedPreference.getInstance(Filiere_Menu.this);

@@ -1,7 +1,6 @@
 package com.ofppt.absys.Main.UI;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +12,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +56,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
 
     public static final int PERMISSIONS_REQUEST_CODE = 0;
     public static final int FILE_PICKER_REQUEST_CODE = 1;
+
     ListView list ;
 
     @Override
@@ -66,6 +64,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
         finish();
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,15 +177,16 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
                 STAGIAIRES item = new STAGIAIRES();
                 try{
                     Log.e("Collumn 1 ",""+ids[0]) ;
-                    item._CEF = ids[1];
+                    item._CEF = ids[0];
                     item._Nom = ids[2];
                     item._Prenom = ids[3];
-                    item._groupes = new Select().from(GROUPES.class).where("CodeGroupe = ?",ids[9]).executeSingle();
+                    item._groupes = new Select().from(GROUPES.class).where("CodeGroupe = ?",ids[1]).executeSingle();
                     item._Absence_Cumulee = 0d;
                     item.save();
 
                 }catch (Exception e){
-                    Log.e("Unknown fuck",e.toString());
+                    Log.e("Unknown fuck","Read csv Exception ");
+                    e.printStackTrace();
                 }
             }
             ActiveAndroid.setTransactionSuccessful();
@@ -203,7 +203,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             //System.out.println("Current time => " + c);
 //            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 //            String formattedDate = df.format(c);
-            String Named = String.format("AbSys-%s.csv", HelperUtils.DateFormatter(c));
+            String Named = String.format("AbSys-%s-%s.csv", HelperUtils.DateFormatter(c),new Date().getTime());
             final File folder = new File(Environment.getExternalStorageDirectory(), ""+Named);
             boolean var = false;
             if (!folder.exists()) {
@@ -362,7 +362,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             String path = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
 
             if (path != null) {
-                Log.d("Path: ", path);
+                Log.d("XXXX Path: ", path);
                 try {
                     Absence_File = new FileReader(path);
                 } catch (FileNotFoundException e) {

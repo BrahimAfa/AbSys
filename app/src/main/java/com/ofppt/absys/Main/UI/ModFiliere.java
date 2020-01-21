@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
-import com.activeandroid.query.Update;
 import com.dd.morphingbutton.MorphingButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ofppt.absys.Main.Models.FILIERES;
